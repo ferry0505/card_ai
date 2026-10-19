@@ -322,3 +322,35 @@
   visibility: hidden;
   pointer-events: none;
 }
+
+
+/* Restore the original centered finale composition, isolated from long-letter rules. */
+.phase-finale .finale-content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+.phase-finale .finale-content .finale-title,
+.phase-finale .finale-content .finale-wishes,
+.phase-finale .finale-content .finale-line,
+.phase-finale .finale-content .finale-footer {
+  width: 100%;
+  align-self: center;
+  text-align: center !important;
+  box-sizing: border-box;
+}
+.phase-finale .finale-content .finale-wishes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.phase-finale .finale-content .finale-line {
+  margin-inline: auto;
+}
+.phase-finale .finale-content .finale-footer {
+  right: 0;
+  left: 0;
+  margin-inline: auto;
+}
