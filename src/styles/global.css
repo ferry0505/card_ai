@@ -238,7 +238,6 @@ canvas:focus-visible {
 }
 
 .phase-opening .keyboard-note,
-.phase-revealing .keyboard-note,
 .phase-completing .keyboard-note,
 .phase-finale .keyboard-note {
   opacity: 0;
