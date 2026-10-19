@@ -438,3 +438,130 @@
 }
 .wax-seal { color: #f4e8c5; }
 .wax-monogram { border-color: rgba(240,230,193,.78); }
+
+
+/* Puppet-punk mechanics: visibly jointed timber panels, hinge plates and exposed gears. */
+.card-depth {
+  background:
+    repeating-linear-gradient(90deg, rgba(229,205,155,.13) 0 2px, transparent 2px 13px),
+    repeating-linear-gradient(4deg, rgba(17,38,50,.14) 0 1px, transparent 1px 18px),
+    linear-gradient(90deg, #263f4c 0%, #5c7884 18%, #355464 50%, #688694 78%, #263f4c 100%);
+  border: 4px solid #b8aa7e;
+  outline: 1px solid rgba(31,55,66,.75);
+  box-shadow: 0 30px 52px rgba(29,52,64,.34), inset 0 0 0 5px rgba(222,209,163,.32), inset 0 0 0 9px rgba(20,43,55,.32);
+}
+.card-inner {
+  background:
+    repeating-linear-gradient(90deg, rgba(231,207,158,.14) 0 2px, transparent 2px 17px),
+    repeating-linear-gradient(2deg, rgba(25,45,55,.12) 0 1px, transparent 1px 24px),
+    linear-gradient(135deg, #91adba, #4f7183 48%, #9ab6c1);
+  border: 4px ridge #d1c49b;
+  box-shadow: inset 0 0 0 5px rgba(39,68,83,.5), inset 0 0 0 8px rgba(226,215,175,.52);
+}
+.card-page .page-face--front {
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 29px, rgba(225,207,164,.22) 30px, transparent 32px),
+    repeating-linear-gradient(2deg, rgba(18,38,49,.17) 0 1px, transparent 1px 21px),
+    linear-gradient(90deg, #274858 0%, #42687a 24%, #315669 50%, #52798a 75%, #274858 100%);
+  border: 2px solid #c6b98d;
+  box-shadow: inset 0 0 0 5px rgba(25,48,61,.65), inset 0 0 0 8px rgba(224,207,155,.42), inset 0 0 22px rgba(9,27,38,.38);
+}
+.card-page .page-face--front::before {
+  inset: 12px;
+  border: 2px solid rgba(220,204,153,.8);
+  box-shadow: inset 0 0 0 4px rgba(25,49,62,.45);
+}
+.card-page .page-face--front::after {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  right: 12%;
+  bottom: 12%;
+  width: clamp(34px, 6vw, 58px);
+  aspect-ratio: 1;
+  border: 3px solid #d7c79a;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, #dce0c8 0 8%, #4d6c7a 10% 24%, transparent 27%),
+    repeating-conic-gradient(from 0deg, #d8c79a 0deg 10deg, #426477 10deg 20deg);
+  box-shadow: 0 3px 0 #1c3a4a, inset 0 0 0 4px #34596d, 0 0 0 3px rgba(21,43,55,.55);
+  opacity: .98;
+  pointer-events: none;
+}
+.cover-botanical.cover-mechanics {
+  z-index: 3;
+  width: 90%;
+  height: 78%;
+  opacity: .95;
+  color: #dfd0a1;
+  filter: drop-shadow(0 3px 2px rgba(12,31,43,.55));
+}
+.cover-copy {
+  z-index: 6;
+  color: #f0e5be;
+  text-shadow: 0 2px 0 #1c3a4b, 0 4px 8px rgba(9,25,35,.55);
+  letter-spacing: .28em;
+}
+.puppet-hardware {
+  z-index: 16;
+  top: 8%;
+  bottom: 8%;
+  width: 15px;
+  border: 2px solid #d6c69a;
+  border-radius: 3px;
+  background:
+    repeating-linear-gradient(180deg, transparent 0 13px, rgba(24,47,60,.85) 14px 17px),
+    linear-gradient(90deg, #4b6c7b, #e0d3a6 28%, #7b9299 56%, #2f5062);
+  box-shadow: 0 0 0 2px rgba(20,43,55,.78), inset 0 0 0 2px rgba(26,51,65,.58), 0 4px 6px rgba(13,30,41,.4);
+}
+.puppet-hardware--left { left: 2px; }
+.puppet-hardware--right { right: 2px; }
+.puppet-hardware i {
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #f0e3b8;
+  background: radial-gradient(circle at 30% 25%, #fff5d2 0 12%, #a9b8b3 30%, #506f7c 78%);
+  box-shadow: 0 1px 0 #203e4e, 0 0 0 2px rgba(23,44,55,.7);
+}
+.puppet-hardware i:nth-child(1) { top: 6%; }
+.puppet-hardware i:nth-child(2) { top: 48%; }
+.puppet-hardware i:nth-child(3) { bottom: 6%; }
+.puppet-hardware::before,
+.puppet-hardware::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 26px;
+  height: 26px;
+  transform: translateX(-50%);
+  border: 3px double #dfd0a0;
+  border-radius: 50%;
+  background: radial-gradient(circle, #c7c9b3 0 12%, #4c6b7a 17% 40%, #203f50 44% 55%, #c6b687 59% 66%, #385a6b 70%);
+  box-shadow: 0 2px 0 rgba(15,34,46,.7), 0 0 0 3px rgba(29,53,65,.55);
+}
+.puppet-hardware::before { top: 23%; }
+.puppet-hardware::after { bottom: 23%; }
+.theatre-curtain {
+  width: 11%;
+  border-left: 2px solid #d8c89a;
+  border-right: 2px solid #d8c89a;
+  background:
+    repeating-linear-gradient(90deg, #24475a 0 5px, #6c8c9a 5px 9px, #345b70 9px 14px),
+    linear-gradient(#54798a,#284b5f);
+  box-shadow: inset 0 0 0 3px rgba(22,44,57,.42), 0 0 0 1px rgba(222,206,157,.7);
+}
+.wax-base, .wax-fragment {
+  background:
+    radial-gradient(circle at 35% 25%, #e8dfbb, #9daea9 20%, #547c8d 52%, #24495d 100%);
+  border: 2px solid #d8c99b;
+  box-shadow: inset 0 0 0 4px rgba(28,57,72,.62), inset 3px 4px 7px rgba(255,255,255,.24), 0 3px 0 #203d4c;
+}
+.wax-seal { color: #f4e8c5; }
+.wax-monogram { border: 2px solid rgba(241,226,183,.92); }
+@media (max-width: 680px) {
+  .puppet-hardware { width: 11px; }
+  .puppet-hardware::before, .puppet-hardware::after { width: 19px; height: 19px; }
+  .card-page .page-face--front::after { width: 34px; }
+}
