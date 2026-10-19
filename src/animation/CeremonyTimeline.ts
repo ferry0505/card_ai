@@ -42,6 +42,7 @@ export class CeremonyTimeline {
       ...Array.from(element.cardBook.querySelectorAll<HTMLElement>('.card-depth, .card-inner')),
     ];
     const fadeTargets = element.revealTargets.filter((target) => target !== element.birthdayLine);
+    const letterStickers = Array.from(element.letterCopy.querySelectorAll<HTMLElement>('.letter-sticker'));
     const finaleLines = Array.from(element.finaleContent.querySelectorAll<HTMLElement>('.finale-line'));
     const finaleFooter = element.finaleContent.querySelector<HTMLElement>('.finale-footer');
 
@@ -165,8 +166,8 @@ export class CeremonyTimeline {
       'finale',
     );
     timeline.to(
-      fadeTargets,
-      { opacity: 0.025, y: -8, duration: duration(0.78), stagger: duration(0.025), ease: 'sine.inOut' },
+      [...fadeTargets, ...letterStickers],
+      { opacity: 0, y: -8, duration: duration(0.62), stagger: duration(0.02), ease: 'sine.inOut' },
       'finale',
     );
     timeline.to(
