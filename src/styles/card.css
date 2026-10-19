@@ -565,3 +565,97 @@
   .puppet-hardware::before, .puppet-hardware::after { width: 19px; height: 19px; }
   .card-page .page-face--front::after { width: 34px; }
 }
+
+
+/* 木制蜡封机关：铜齿轮、木叶片和铆钉共同构成开启结构。 */
+.wax-seal {
+  width: 104px;
+  min-width: 104px;
+  height: 104px;
+  min-height: 104px;
+  filter: drop-shadow(0 8px 5px rgba(18, 42, 55, .42));
+}
+.wax-seal::before {
+  inset: 11px;
+  border: 1px solid rgba(244, 226, 174, .7);
+  background: linear-gradient(135deg, rgba(255,255,255,.2), transparent 40%, rgba(14,35,47,.18));
+  animation: none;
+}
+.wax-base {
+  inset: 8px;
+  border: 4px ridge #d8c58f;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 24%, rgba(255,255,255,.28), transparent 24%),
+    repeating-conic-gradient(from 0deg, #8ca8ad 0deg 8deg, #d6c28a 8deg 12deg, #426779 12deg 20deg);
+  box-shadow: inset 0 0 0 4px #29495a, inset 0 0 0 7px #d3c18b, 0 4px 0 #203c4a;
+}
+.mechanism-gear {
+  position: absolute;
+  z-index: 4;
+  inset: 17px;
+  border: 4px double #e5d19a;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, #e7d7a7 0 7%, #3b6174 9% 22%, transparent 24%),
+    repeating-conic-gradient(from 0deg, #e1d09c 0deg 9deg, #577b8a 9deg 18deg);
+  box-shadow: inset 0 0 0 3px #284b5d, 0 2px 0 rgba(22,44,55,.6);
+  transform-origin: center;
+  will-change: transform;
+}
+.mechanism-gear::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 2px solid #f1e2b2;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px #345a6d;
+}
+.mechanism-leaf {
+  position: absolute;
+  z-index: 5;
+  inset: 15px;
+  border: 2px solid #e2d09b;
+  border-radius: 12px 12px 6px 6px;
+  transform-origin: 50% 82%;
+  background:
+    repeating-linear-gradient(90deg, rgba(25,50,63,.22) 0 2px, transparent 2px 7px),
+    linear-gradient(135deg, #a5b7ad 0%, #557b8d 24%, #345b70 66%, #203f51 100%);
+  box-shadow: inset 0 0 0 3px rgba(224,208,153,.72), inset 0 0 0 6px rgba(24,48,62,.48), 0 3px 0 #203b4b;
+  clip-path: polygon(50% 0, 100% 24%, 87% 100%, 13% 100%, 0 24%);
+  will-change: transform, opacity;
+}
+.mechanism-leaf--one { transform: rotate(-12deg); }
+.mechanism-leaf--two { transform: rotate(12deg); }
+.mechanism-leaf--three {
+  inset: 23px 17px 10px;
+  border-radius: 5px 5px 12px 12px;
+  transform-origin: 50% 15%;
+  clip-path: polygon(13% 0, 87% 0, 100% 76%, 50% 100%, 0 76%);
+}
+.mechanism-bolt {
+  position: absolute;
+  z-index: 7;
+  width: 8px;
+  height: 8px;
+  border: 2px solid #f2e3b5;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, #fff9d9, #9caeb0 46%, #35596a 80%);
+  box-shadow: 0 1px 1px rgba(14,35,46,.8);
+}
+.mechanism-bolt--one { top: 13px; left: 45px; }
+.mechanism-bolt--two { right: 13px; bottom: 30px; }
+.mechanism-bolt--three { left: 13px; bottom: 30px; }
+.wax-monogram {
+  z-index: 8;
+  width: 43px;
+  height: 43px;
+  border: 2px solid #e6d39a;
+  background: radial-gradient(circle at 30% 25%, #55798a, #234658 76%);
+  box-shadow: inset 0 0 0 3px rgba(226,209,154,.38), 0 2px 3px rgba(10,29,40,.5);
+  color: #f4e7bd;
+  font-size: .92rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-indent: 0;
+}
