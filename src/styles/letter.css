@@ -263,3 +263,62 @@
 .puppet-hardware i,
 .puppet-hardware::before,
 .puppet-hardware::after { display: none !important; }
+
+/* Keep long-form letter content in normal flow so mouse wheel/trackpad can scroll it. */
+.letter-copy-wrap {
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+.letter-copy {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  padding-block: 4%;
+}
+.letter-wishes {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: .42em;
+}
+.letter-sticker {
+  position: relative;
+  display: block;
+  width: min(100%, 210px);
+  margin: .45em auto .65em;
+  padding: 0;
+  text-align: center;
+}
+.letter-sticker img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 190px;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto;
+}
+.letter-sticker figcaption {
+  margin-top: .35em;
+  font-size: .78em;
+  line-height: 1.5;
+  letter-spacing: .04em;
+  opacity: .82;
+}
+.letter-sticker--snow {
+  width: min(100%, 112px);
+}
+.letter-sticker--snow img {
+  max-height: 100px;
+}
+/* The finale keeps its original centered typography; only the letter layer is removed. */
+.phase-finale .letter-copy-wrap {
+  visibility: hidden;
+  pointer-events: none;
+}
