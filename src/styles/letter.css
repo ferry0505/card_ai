@@ -99,7 +99,11 @@
   position: absolute;
   inset: 13.5% 12.5% 11.5%;
   z-index: 3;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(114, 158, 178, .42) transparent;
   color: var(--color-ink);
 }
 
@@ -271,4 +275,16 @@
     0 34px 76px rgba(69, 50, 46, 0.13),
     0 9px 22px rgba(69, 50, 46, 0.08),
     0 0 42px rgba(195, 161, 93, 0.08);
+}
+
+/* The letter itself is a scrollable long-form reading surface. */
+.letter-copy-wrap::-webkit-scrollbar { width: 5px; }
+.letter-copy-wrap::-webkit-scrollbar-thumb { border-radius: 9px; background: rgba(114,158,178,.42); }
+.letter-copy-wrap::-webkit-scrollbar-track { background: transparent; }
+.letter-copy { justify-content: flex-start; padding-block: 4%; }
+.reveal-line { white-space: normal; }
+.letter-sticker { flex: 0 0 auto; }
+@media (max-width: 370px) {
+  .letter-copy { padding-block: 2%; }
+  .letter-sticker--postcard { gap: 5px; padding: 5px; }
 }
