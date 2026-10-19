@@ -61,7 +61,7 @@ export class CeremonyTimeline {
     gsap.set(element.paperOrnaments, { opacity: 1 });
     gsap.set(element.revealTargets, { x: 0, y: 0, scale: 1, opacity: 1 });
     gsap.set(element.birthdayLine, { x: 0, y: 0, scale: 1, opacity: 1, transformOrigin: 'left center' });
-    gsap.set(element.revealCanvas, { opacity: 1 });
+    gsap.set(element.revealCanvas, { opacity: 1, pointerEvents: 'auto' });
     gsap.set(element.finaleContent, { opacity: 1 });
     gsap.set(element.finaleTitle, { opacity: 0, y: 7 });
     gsap.set([...finaleLines, ...(finaleFooter ? [finaleFooter] : [])], { opacity: 0, y: 10 });
@@ -167,6 +167,10 @@ export class CeremonyTimeline {
       { y: -10, duration: duration(1.2), ease: 'sine.inOut' },
       'completion+=0.18',
     );
+    timeline.call(() => {
+      element.revealCanvas.style.pointerEvents = 'none';
+      element.letterCopyWrap.style.pointerEvents = 'auto';
+    }, [], `completion+=${duration(1.5)}`);
     timeline.to(element.stageHint, { opacity: 0, y: 5, duration: duration(0.5) }, 'completion');
     timeline.to(
       element.continueButton,
