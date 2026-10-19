@@ -15,39 +15,33 @@ const escapeHtml = (value: string): string =>
 const coverBotanical = `
   <svg class="cover-botanical cover-mechanics" viewBox="0 0 320 220" aria-hidden="true" focusable="false">
     <defs>
-      <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f1e6bd"/><stop offset=".52" stop-color="#b5c4bd"/><stop offset="1" stop-color="#d8c48b"/></linearGradient>
-      <linearGradient id="wood" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#29485a"/><stop offset=".5" stop-color="#7896a0"/><stop offset="1" stop-color="#29485a"/></linearGradient>
+      <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f0e5bd"/><stop offset=".5" stop-color="#b9c8bf"/><stop offset="1" stop-color="#d0b77a"/></linearGradient>
+      <linearGradient id="wood" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1f4054"/><stop offset=".45" stop-color="#52798b"/><stop offset="1" stop-color="#243f51"/></linearGradient>
+      <linearGradient id="inlay" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e5d7a6"/><stop offset="1" stop-color="#9aaea9"/></linearGradient>
     </defs>
-    <g fill="none" stroke="url(#brass)" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M160 24V63M160 157V196" stroke-width="3"/>
-      <path d="M139 50L160 63L181 50M139 170L160 157L181 170" stroke-width="2.5"/>
-      <path d="M104 110H126M194 110H216" stroke-width="3"/>
-      <path d="M118 102L126 110L118 118M202 102L194 110L202 118" stroke-width="2"/>
-      <circle cx="160" cy="24" r="4"/><circle cx="160" cy="196" r="4"/>
+    <!-- A carved cabinet plaque with restrained nautical filigree, not a pile of gears. -->
+    <path d="M160 18C147 33 130 35 111 36C119 49 115 61 101 71C116 78 123 91 119 110C123 129 116 142 101 149C115 160 119 172 111 184C132 185 148 191 160 204C172 191 188 185 209 184C201 172 205 160 219 149C204 142 197 129 201 110C197 91 204 78 219 71C205 61 201 49 209 36C190 35 173 33 160 18Z" fill="url(#wood)" stroke="url(#brass)" stroke-width="2.5"/>
+    <path d="M160 29C148 42 136 45 122 46C130 58 125 68 114 75C129 84 134 95 131 110C134 125 129 137 114 145C125 153 130 165 122 174C139 176 151 184 160 194C169 184 181 176 198 174C190 165 195 153 206 145C191 137 186 125 189 110C186 95 191 84 206 75C195 68 190 58 198 46C184 45 172 42 160 29Z" fill="none" stroke="url(#inlay)" stroke-width="1.5" opacity=".9"/>
+    <g fill="none" stroke="url(#brass)" stroke-width="1.7" stroke-linecap="round">
+      <path d="M160 39V67M160 153V181"/>
+      <path d="M150 50C136 53 135 65 145 72C151 76 156 72 160 67C164 72 169 76 175 72C185 65 184 53 170 50"/>
+      <path d="M150 170C136 167 135 155 145 148C151 144 156 148 160 153C164 148 169 144 175 148C185 155 184 167 170 170"/>
+      <path d="M126 92C137 87 145 93 145 102C145 108 139 110 132 110C139 110 145 112 145 118C145 127 137 133 126 128"/>
+      <path d="M194 92C183 87 175 93 175 102C175 108 181 110 188 110C181 110 175 112 175 118C175 127 183 133 194 128"/>
+      <path d="M141 110H179"/>
     </g>
-    <g transform="translate(160 110)">
-      <circle r="43" fill="url(#wood)" stroke="url(#brass)" stroke-width="3"/>
-      <circle r="34" fill="none" stroke="#d8c48b" stroke-width="2"/>
-      <circle r="25" fill="#34596b" stroke="url(#brass)" stroke-width="2"/>
-      <g fill="url(#brass)">
-        <rect x="-3" y="-42" width="6" height="12" rx="1"/>
-        <rect x="-3" y="30" width="6" height="12" rx="1"/>
-        <rect x="30" y="-3" width="12" height="6" rx="1"/>
-        <rect x="-42" y="-3" width="12" height="6" rx="1"/>
-        <rect x="-3" y="-42" width="6" height="12" rx="1" transform="rotate(45)"/>
-        <rect x="-3" y="-42" width="6" height="12" rx="1" transform="rotate(90)"/>
-        <rect x="-3" y="-42" width="6" height="12" rx="1" transform="rotate(135)"/>
-        <rect x="-3" y="-42" width="6" height="12" rx="1" transform="rotate(225)"/>
-      </g>
-      <circle r="14" fill="url(#brass)" stroke="#31566b" stroke-width="2"/>
-      <circle r="6" fill="#31566b"/>
-      <path d="M-17-17L17 17M17-17L-17 17" stroke="#d8c48b" stroke-width="2" opacity=".9"/>
+    <path d="M160 77L178 91V129L160 143L142 129V91Z" fill="#213f51" stroke="url(#brass)" stroke-width="2"/>
+    <path d="M160 84L171 94V126L160 136L149 126V94Z" fill="url(#wood)" stroke="#d9c68d" stroke-width="1.2"/>
+    <path d="M160 91L165 105L160 118L155 105Z" fill="url(#brass)"/>
+    <circle cx="160" cy="110" r="4" fill="#f0e5bd" stroke="#25475a" stroke-width="1.5"/>
+    <g fill="url(#brass)" stroke="#29495b" stroke-width="1">
+      <circle cx="160" cy="24" r="3"/><circle cx="160" cy="198" r="3"/>
+      <circle cx="108" cy="72" r="2.5"/><circle cx="212" cy="72" r="2.5"/>
+      <circle cx="108" cy="148" r="2.5"/><circle cx="212" cy="148" r="2.5"/>
     </g>
-    <g fill="url(#brass)" stroke="#31566b" stroke-width="1.5">
-      <circle cx="160" cy="63" r="4"/><circle cx="160" cy="157" r="4"/>
-      <circle cx="126" cy="110" r="3.5"/><circle cx="194" cy="110" r="3.5"/>
-    </g>
-  </svg>`;
+    <path d="M40 110H96M224 110H280" stroke="url(#brass)" stroke-width="1.3" opacity=".5"/>
+    <path d="M47 104L40 110L47 116M273 104L280 110L273 116" fill="none" stroke="url(#brass)" stroke-width="1.3" opacity=".5"/>
+  </svg>
 const paperBotanical = `
   <svg class="paper-botanical paper-botanical--top" viewBox="0 0 150 120" aria-hidden="true" focusable="false">
     <g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
