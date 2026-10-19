@@ -84,20 +84,20 @@ export class CeremonyTimeline {
     timeline.call(this.callbacks.onWaxSound, [], duration(0.13));
     // 蜡封并非碎裂：中心齿轮先咬合旋转，三片木制机关叶片像小门一样向外翻开。
     timeline.to(element.waxSeal, { scale: 1.04, y: 0, duration: duration(0.22), ease: 'power2.out' }, duration(0.18));
-    timeline.to(mechanismGear, { rotate: 135, duration: duration(0.72), ease: 'power3.inOut' }, duration(0.2));
+    timeline.to(mechanismGear, { rotate: 180, duration: duration(0.86), ease: 'power3.inOut' }, duration(0.2));
     timeline.to(
       mechanismLeaves,
       {
-        x: (index) => [-16, 16, 0][index] ?? 0,
-        y: (index) => [-10, -10, 17][index] ?? 0,
-        rotate: (index) => [-52, 52, 68][index] ?? 0,
-        scale: 0.82,
-        opacity: 0.08,
-        duration: duration(0.72),
-        stagger: duration(0.06),
-        ease: 'back.in(1.1)',
+        x: (index) => [-17, 17, 0][index] ?? 0,
+        y: (index) => [-8, -8, 16][index] ?? 0,
+        rotate: (index) => [-66, 66, 78][index] ?? 0,
+        scale: 0.9,
+        opacity: 0.06,
+        duration: duration(0.78),
+        stagger: duration(0.11),
+        ease: 'power3.inOut',
       },
-      duration(0.36),
+      duration(0.34),
     );
     timeline.to([waxBase, waxMonogram], { scale: 0.72, opacity: 0, duration: duration(0.42), ease: 'power2.in' }, duration(0.72));
     timeline.to(element.waxSeal, { autoAlpha: 0, scale: 0.86, rotate: 24, duration: duration(0.34), pointerEvents: 'none' }, duration(0.98));
