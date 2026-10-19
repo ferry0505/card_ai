@@ -246,3 +246,20 @@
 /* The letter is immediately readable once the theatre doors open. */
 .letter-copy-wrap { pointer-events: auto; }
 .letter-copy { opacity: 1; }
+
+/* The letter should be the focus: reduce the side mechanism rails to subtle structural trim. */
+.puppet-hardware {
+  width: 5px;
+  top: 15%;
+  bottom: 15%;
+  border: 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(76,104,116,.22), rgba(188,204,201,.42), rgba(76,104,116,.2));
+  box-shadow: none;
+  opacity: .38;
+}
+.puppet-hardware--left { left: 4px; }
+.puppet-hardware--right { right: 4px; }
+.puppet-hardware i,
+.puppet-hardware::before,
+.puppet-hardware::after { display: none !important; }
