@@ -15,34 +15,39 @@ const escapeHtml = (value: string): string =>
 const coverBotanical = `
   <svg class="cover-botanical cover-mechanics" viewBox="0 0 320 220" aria-hidden="true" focusable="false">
     <defs>
-      <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f1e6bd"/><stop offset=".48" stop-color="#a9b8b6"/><stop offset="1" stop-color="#d8c48b"/></linearGradient>
-      <linearGradient id="wood" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#29485a"/><stop offset=".5" stop-color="#6b8b9b"/><stop offset="1" stop-color="#29485a"/></linearGradient>
+      <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f1e6bd"/><stop offset=".52" stop-color="#b5c4bd"/><stop offset="1" stop-color="#d8c48b"/></linearGradient>
+      <linearGradient id="wood" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#29485a"/><stop offset=".5" stop-color="#7896a0"/><stop offset="1" stop-color="#29485a"/></linearGradient>
     </defs>
     <g fill="none" stroke="url(#brass)" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M35 46L96 82L143 57L191 95L275 56" stroke-width="7" opacity=".85"/>
-      <path d="M49 170L104 136L153 162L215 127L271 164" stroke-width="5" opacity=".72"/>
-      <path d="M96 82L104 136M191 95L215 127" stroke-width="5"/>
-      <path d="M33 46L33 170M275 56L271 164" stroke-width="3" stroke-dasharray="3 8" opacity=".8"/>
+      <path d="M160 24V63M160 157V196" stroke-width="3"/>
+      <path d="M139 50L160 63L181 50M139 170L160 157L181 170" stroke-width="2.5"/>
+      <path d="M104 110H126M194 110H216" stroke-width="3"/>
+      <path d="M118 102L126 110L118 118M202 102L194 110L202 118" stroke-width="2"/>
+      <circle cx="160" cy="24" r="4"/><circle cx="160" cy="196" r="4"/>
     </g>
-    <g fill="url(#wood)" stroke="url(#brass)" stroke-width="2.5">
-      <circle cx="96" cy="82" r="19"/><circle cx="191" cy="95" r="17"/>
-      <circle cx="104" cy="136" r="14"/><circle cx="215" cy="127" r="14"/>
+    <g transform="translate(160 110)">
+      <circle r="43" fill="url(#wood)" stroke="url(#brass)" stroke-width="3"/>
+      <circle r="34" fill="none" stroke="#d8c48b" stroke-width="2"/>
+      <circle r="25" fill="#34596b" stroke="url(#brass)" stroke-width="2"/>
+      <g fill="url(#brass)">
+        <rect x="-3" y="-42" width="6" height="12" rx="1"/>
+        <rect x="-3" y="30" width="6" height="12" rx="1"/>
+        <rect x="30" y="-3" width="12" height="6" rx="1"/>
+        <rect x="-42" y="-3" width="12" height="6" rx="1"/>
+        <rect x="-3" y="-42" width="6" height="12" rx="1" transform="rotate(45)"/>
+        <rect x="-3" y="-42" width="6" height="12" rx="1" transform="rotate(90)"/>
+        <rect x="-3" y="-42" width="6" height="12" rx="1" transform="rotate(135)"/>
+        <rect x="-3" y="-42" width="6" height="12" rx="1" transform="rotate(225)"/>
+      </g>
+      <circle r="14" fill="url(#brass)" stroke="#31566b" stroke-width="2"/>
+      <circle r="6" fill="#31566b"/>
+      <path d="M-17-17L17 17M17-17L-17 17" stroke="#d8c48b" stroke-width="2" opacity=".9"/>
     </g>
-    <g fill="url(#brass)" stroke="#31566b" stroke-width="2">
-      <circle cx="96" cy="82" r="6"/><circle cx="191" cy="95" r="5"/>
-      <circle cx="104" cy="136" r="4.5"/><circle cx="215" cy="127" r="4.5"/>
-      <circle cx="33" cy="46" r="5"/><circle cx="33" cy="170" r="5"/>
-      <circle cx="275" cy="56" r="5"/><circle cx="271" cy="164" r="5"/>
+    <g fill="url(#brass)" stroke="#31566b" stroke-width="1.5">
+      <circle cx="160" cy="63" r="4"/><circle cx="160" cy="157" r="4"/>
+      <circle cx="126" cy="110" r="3.5"/><circle cx="194" cy="110" r="3.5"/>
     </g>
-    <g transform="translate(246 88)" fill="url(#brass)" stroke="#31566b" stroke-width="2">
-      <path d="M0-26L7-20L17-21L19-11L26-5L22 4L25 14L15 18L10 27L1 23L-8 27L-13 18L-23 15L-20 5L-26-3L-19-11L-18-21L-8-20Z"/>
-      <circle r="10" fill="#365d73"/><circle r="4" fill="#f1e6bd"/>
-    </g>
-    <g fill="none" stroke="#d8c48b" stroke-width="1.4" opacity=".75">
-      <path d="M42 28h52M42 34h32M221 190h53M238 196h36"/>
-      <path d="M145 28l5 8 5-8 5 8 5-8"/>
-    </g>
-  </svg>`;
+  </svg>
 const paperBotanical = `
   <svg class="paper-botanical paper-botanical--top" viewBox="0 0 150 120" aria-hidden="true" focusable="false">
     <g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
@@ -85,8 +90,8 @@ export const createTemplate = (): string => {
       <div class="botanical-shadow botanical-shadow--right" aria-hidden="true"></div>
 
       <section class="scene" data-scene aria-label="${escapeHtml(copy.accessibility.sceneLabel)}">
-        <div class="cloud-curtain cloud-curtain--left" aria-hidden="true"><span></span><span></span><span></span></div>
-        <div class="cloud-curtain cloud-curtain--right" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="cloud-curtain mist-curtain mist-curtain--left" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="cloud-curtain mist-curtain mist-curtain--right" aria-hidden="true"><span></span><span></span><span></span></div>
         <div class="snow-specks" aria-hidden="true"></div>
         <div class="card-stage" data-card-stage>
           <div class="card-float" data-card-float>
