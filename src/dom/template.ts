@@ -47,7 +47,7 @@ const coverBotanical = `
       <circle cx="160" cy="63" r="4"/><circle cx="160" cy="157" r="4"/>
       <circle cx="126" cy="110" r="3.5"/><circle cx="194" cy="110" r="3.5"/>
     </g>
-  </svg>
+  </svg>`;
 const paperBotanical = `
   <svg class="paper-botanical paper-botanical--top" viewBox="0 0 150 120" aria-hidden="true" focusable="false">
     <g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
