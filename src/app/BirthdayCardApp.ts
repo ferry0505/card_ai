@@ -102,7 +102,7 @@ export class BirthdayCardApp {
   private startReveal(): void {
     if (!this.state.advance('opening')) return;
     // 开盒动画结束后直接呈现完整信件，不再要求用户擦除遮罩。
-    this.state.advance('revealing');
+    if (!this.state.advance('revealing')) return;
     this.state.advance('revealing');
     this.elements.stageHint.textContent = cardContent.hints.revealing;
     this.elements.srStatus.textContent = cardContent.accessibility.openedStatus;
