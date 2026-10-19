@@ -30,8 +30,8 @@ export class CeremonyTimeline {
     const element = this.elements;
     const duration = (seconds: number): number =>
       reducedMotion ? Math.max(0.12, seconds * 0.24) : seconds;
-    const crackPaths = Array.from(element.waxSeal.querySelectorAll<SVGPathElement>('.wax-cracks path'));
-    const fragments = Array.from(element.waxSeal.querySelectorAll<HTMLElement>('.wax-fragment'));
+    const mechanismLeaves = Array.from(element.waxSeal.querySelectorAll<HTMLElement>('.mechanism-leaf'));
+    const mechanismGear = element.waxSeal.querySelector<HTMLElement>('.mechanism-gear');
     const waxBase = element.waxSeal.querySelector<HTMLElement>('.wax-base');
     const waxMonogram = element.waxSeal.querySelector<HTMLElement>('.wax-monogram');
     const cloudCurtains = Array.from(element.experience.querySelectorAll<HTMLElement>('.cloud-curtain'));
@@ -69,8 +69,7 @@ export class CeremonyTimeline {
     gsap.set(element.replayButton, { opacity: 0, y: 8, pointerEvents: 'none' });
     gsap.set(shellParts, { opacity: 1, filter: 'blur(0px)' });
     gsap.set(element.waxSeal, { autoAlpha: 1, scale: 1, rotate: 0, pointerEvents: 'auto' });
-    gsap.set([waxBase, waxMonogram, ...fragments], { opacity: 1 });
-    gsap.set(crackPaths, { opacity: 0, strokeDashoffset: 1 });
+    gsap.set([waxBase, waxMonogram, ...mechanismLeaves, mechanismGear].filter(Boolean), { opacity: 1, x: 0, y: 0, rotate: 0, scale: 1 });
     gsap.set(decorations.all, { opacity: 0, x: 0, y: 0, scale: 0.3, rotate: 0 });
 
     const timeline = gsap.timeline({
@@ -83,27 +82,25 @@ export class CeremonyTimeline {
     timeline.to(element.stageHint, { opacity: 0, y: 5, duration: duration(0.35), ease: 'sine.inOut' }, 0);
     timeline.to(element.waxSeal, { scale: 0.92, y: 2, duration: duration(0.18), ease: 'power2.in' }, 0);
     timeline.call(this.callbacks.onWaxSound, [], duration(0.13));
+    // 蜡封并非碎裂：中心齿轮先咬合旋转，三片木制机关叶片像小门一样向外翻开。
+    timeline.to(element.waxSeal, { scale: 1.04, y: 0, duration: duration(0.22), ease: 'power2.out' }, duration(0.18));
+    timeline.to(mechanismGear, { rotate: 135, duration: duration(0.72), ease: 'power3.inOut' }, duration(0.2));
     timeline.to(
-      crackPaths,
-      { opacity: 0.9, strokeDashoffset: 0, duration: duration(0.38), stagger: duration(0.035), ease: 'power2.out' },
-      duration(0.2),
-    );
-    timeline.to(element.waxSeal, { scale: 1, y: 0, duration: duration(0.24), ease: 'power2.out' }, duration(0.38));
-    timeline.to([waxBase, waxMonogram], { opacity: 0.18, duration: duration(0.3) }, duration(0.5));
-    timeline.to(
-      fragments,
+      mechanismLeaves,
       {
-        x: (index) => [-12, 13, 4][index] ?? 0,
-        y: (index) => [9, 7, 17][index] ?? 10,
-        rotate: (index) => [-7, 8, 3][index] ?? 0,
-        opacity: 0,
-        duration: duration(0.52),
-        stagger: duration(0.035),
-        ease: 'power2.inOut',
+        x: (index) => [-16, 16, 0][index] ?? 0,
+        y: (index) => [-10, -10, 17][index] ?? 0,
+        rotate: (index) => [-52, 52, 68][index] ?? 0,
+        scale: 0.82,
+        opacity: 0.08,
+        duration: duration(0.72),
+        stagger: duration(0.06),
+        ease: 'back.in(1.1)',
       },
-      duration(0.52),
+      duration(0.36),
     );
-    timeline.to(element.waxSeal, { autoAlpha: 0, duration: duration(0.28), pointerEvents: 'none' }, duration(0.84));
+    timeline.to([waxBase, waxMonogram], { scale: 0.72, opacity: 0, duration: duration(0.42), ease: 'power2.in' }, duration(0.72));
+    timeline.to(element.waxSeal, { autoAlpha: 0, scale: 0.86, rotate: 24, duration: duration(0.34), pointerEvents: 'none' }, duration(0.98));
 
     timeline.call(this.callbacks.onPaperSound, [], duration(0.66));
     // 云幕先像舞台帷幕一样缓慢分开，再露出木盒剧场。
