@@ -1,4 +1,3 @@
-import { gsap } from 'gsap';
 import { CeremonyTimeline } from '../animation/CeremonyTimeline';
 import { SoundController } from '../audio/SoundController';
 import { cardContent, experience, theme } from '../config/content';
@@ -6,7 +5,6 @@ import { collectElements, type AppElements } from '../dom/elements';
 import { createTemplate } from '../dom/template';
 import { DecorationManager, type DecorationSet } from '../effects/DecorationManager';
 import { TiltController } from '../interaction/TiltController';
-import { InkRevealController } from '../reveal/InkRevealController';
 import { CardState, type CardPhase } from '../state/CardState';
 
 export class BirthdayCardApp {
@@ -16,12 +14,9 @@ export class BirthdayCardApp {
   private readonly motionQuery = matchMedia('(prefers-reduced-motion: reduce)');
   private readonly abortController = new AbortController();
   private readonly elements: AppElements;
-  private readonly reveal: InkRevealController;
   private readonly tilt: TiltController;
   private readonly ceremony: CeremonyTimeline;
   private decorationSet: DecorationSet;
-  private fallbackCompletion: ReturnType<typeof gsap.to> | null = null;
-  private runId = 0;
 
   constructor(private readonly root: HTMLElement) {
     document.title = cardContent.documentTitle;
@@ -32,17 +27,6 @@ export class BirthdayCardApp {
     this.elements.experience.classList.toggle('reduce-motion', this.motionQuery.matches);
 
     this.decorationSet = this.decorations.build(this.elements.cardBook, this.motionQuery.matches);
-    this.reveal = new InkRevealController({
-      canvas: this.elements.revealCanvas,
-      glow: this.elements.revealGlow,
-      targets: this.elements.revealTargets,
-      threshold: experience.revealThreshold,
-      idleDelayMs: experience.idleHintDelayMs,
-      onComplete: () => this.finishReveal(),
-      onProgress: (progress) => {
-        this.elements.experience.style.setProperty('--reveal-progress', progress.toFixed(3));
-      },
-    });
     this.tilt = new TiltController(
       this.elements.cardBook,
       experience.maxTiltDegrees,
@@ -65,9 +49,7 @@ export class BirthdayCardApp {
 
   destroy(): void {
     this.abortController.abort();
-    this.fallbackCompletion?.kill();
     this.ceremony.kill();
-    this.reveal.destroy();
     this.tilt.destroy();
     this.decorations.clear();
     this.sound.destroy();
@@ -93,14 +75,10 @@ export class BirthdayCardApp {
   }
 
   private prepareRun(): void {
-    this.runId += 1;
     this.fallbackCompletion?.kill();
-    this.fallbackCompletion = null;
-    this.reveal.reset();
     this.decorationSet = this.decorations.build(this.elements.cardBook, this.motionQuery.matches);
     this.ceremony.rebuild(this.decorationSet, this.motionQuery.matches);
     this.elements.finaleContent.setAttribute('aria-hidden', 'true');
-    this.elements.experience.style.setProperty('--reveal-progress', '0');
     this.elements.stageHint.textContent = cardContent.hints.sealed;
     this.elements.stageHint.removeAttribute('style');
     this.elements.waxSeal.disabled = false;
@@ -124,31 +102,10 @@ export class BirthdayCardApp {
 
   private startReveal(): void {
     if (!this.state.advance('opening')) return;
+    // 开盒动画结束后直接呈现完整信件，不再要求用户擦除遮罩。
+    this.state.advance('revealing');
     this.elements.stageHint.textContent = cardContent.hints.revealing;
     this.elements.srStatus.textContent = cardContent.accessibility.openedStatus;
-    const available = this.reveal.activate();
-    if (available) {
-      this.elements.revealCanvas.focus({ preventScroll: true });
-    } else {
-      const currentRun = this.runId;
-      gsap.set(this.elements.letterCopy, { opacity: 0 });
-      this.elements.revealCanvas.style.display = 'none';
-      this.fallbackCompletion = gsap.to(this.elements.letterCopy, {
-        opacity: 1,
-        duration: this.motionQuery.matches ? 0.16 : 0.68,
-        ease: 'sine.inOut',
-        onComplete: () => {
-          if (currentRun === this.runId) this.finishReveal();
-        },
-      });
-    }
-  }
-
-  private finishReveal(): void {
-    if (!this.state.advance('revealing')) return;
-    this.reveal.lock();
-    this.elements.srStatus.textContent = cardContent.accessibility.completingStatus;
-    this.ceremony.playCompletion();
   }
 
   private showContinueControl(): void {
@@ -190,7 +147,6 @@ export class BirthdayCardApp {
     this.ceremony.kill();
     this.tilt.stop();
     this.decorations.clear();
-    this.elements.revealCanvas.style.removeProperty('display');
     this.state.reset();
     this.prepareRun();
     this.elements.waxSeal.focus({ preventScroll: true });
@@ -253,11 +209,9 @@ export class BirthdayCardApp {
     this.elements.experience.classList.toggle('is-page-hidden', hidden);
     if (hidden) {
       this.ceremony.pauseForVisibility();
-      this.reveal.pause();
       void this.sound.pauseForVisibility();
     } else {
       this.ceremony.resumeForVisibility();
-      this.reveal.resume();
       void this.sound.resumeForVisibility();
     }
   }
