@@ -4,10 +4,10 @@ export const cardContent = {
   cover: '圣诞来信',
   decorative: {
     innerMark: 'A LITTLE WINTER THEATRE',
-    waxMonogram: '雪',
+    waxMonogram: '煮酒',
   },
   hints: {
-    sealed: '轻触任意位置，拉开云幕',
+    sealed: '轻触任意位置，启动木制机关',
     revealing: '移动光芒，慢慢读完这封信',
     keyboard: '按 Enter 或空格键，也可以开启剧场',
   },
@@ -39,7 +39,7 @@ export const cardContent = {
     soundOnAria: '关闭贺卡声音',
     soundOffAria: '开启贺卡声音',
     sealAria: '开启圣诞木偶剧场',
-    revealAria: '在信纸上移动指针显影祝福；也可按回车键直接读完',
+    revealAria: '启动木制机关，打开圣诞剧场',
   },
   accessibility: {
     sceneLabel: '雪幕之下圣诞贺卡',
