@@ -661,3 +661,14 @@ canvas:focus-visible {
 .mist-curtain--right span { left: auto; right: -7%; }
 .mist-curtain--right span:nth-child(2) { right: 4%; }
 .mist-curtain--right span:nth-child(3) { right: -12%; }
+
+/* Slightly denser, more visible drifting mist while keeping the center legible. */
+.mist-curtain { opacity: .97; }
+.mist-curtain span,
+.mist-curtain span:nth-child(2),
+.mist-curtain span:nth-child(3) {
+  background: radial-gradient(ellipse at 50% 50%, rgba(250,254,255,.88) 0%, rgba(229,242,249,.62) 35%, rgba(196,220,234,.3) 62%, transparent 78%);
+}
+.mist-curtain span:nth-child(1) { filter: blur(11px); opacity: .92; }
+.mist-curtain span:nth-child(2) { filter: blur(16px); opacity: .88; }
+.mist-curtain span:nth-child(3) { filter: blur(10px); opacity: .76; }
