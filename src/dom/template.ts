@@ -41,7 +41,7 @@ const coverBotanical = `
     </g>
     <path d="M40 110H96M224 110H280" stroke="url(#brass)" stroke-width="1.3" opacity=".5"/>
     <path d="M47 104L40 110L47 116M273 104L280 110L273 116" fill="none" stroke="url(#brass)" stroke-width="1.3" opacity=".5"/>
-  </svg>
+  </svg>`;
 const paperBotanical = `
   <svg class="paper-botanical paper-botanical--top" viewBox="0 0 150 120" aria-hidden="true" focusable="false">
     <g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
