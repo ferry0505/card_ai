@@ -14,7 +14,7 @@ interface CeremonyCallbacks {
 
 /**
  * 开封、翻页、补全、终章都编排在同一条主时间轴中。
- * 显影阶段由 addPause 暂停，覆盖率达标后从 completion 标签继续。
+ * 开封动画结束后直接进入阅读阶段，信件内容不再需要手动擦除显影。
  */
 export class CeremonyTimeline {
   private master: ReturnType<typeof gsap.timeline> | null = null;
@@ -61,7 +61,6 @@ export class CeremonyTimeline {
     gsap.set(element.paperOrnaments, { opacity: 1 });
     gsap.set(element.revealTargets, { x: 0, y: 0, scale: 1, opacity: 1 });
     gsap.set(element.birthdayLine, { x: 0, y: 0, scale: 1, opacity: 1, transformOrigin: 'left center' });
-    gsap.set(element.revealCanvas, { opacity: 1, pointerEvents: 'auto' });
     gsap.set(element.finaleContent, { opacity: 1 });
     gsap.set(element.finaleTitle, { opacity: 0, y: 7 });
     gsap.set([...finaleLines, ...(finaleFooter ? [finaleFooter] : [])], { opacity: 0, y: 10 });
@@ -154,23 +153,13 @@ export class CeremonyTimeline {
     );
     timeline.call(this.callbacks.onRevealReady, [], duration(3.35));
     timeline.to(element.stageHint, { opacity: 1, y: 0, duration: duration(0.45), ease: 'sine.inOut' }, duration(3.38));
-    timeline.addPause('revealHold');
-    timeline.addLabel('completion', 'revealHold+=0.02');
+    timeline.addLabel('completion', duration(3.9));
 
-    timeline.to(
-      element.revealCanvas,
-      { opacity: 0, duration: duration(1.5), ease: 'sine.inOut' },
-      'completion',
-    );
     timeline.to(
       element.letterCopy,
       { y: -10, duration: duration(1.2), ease: 'sine.inOut' },
       'completion+=0.18',
     );
-    timeline.call(() => {
-      element.revealCanvas.style.pointerEvents = 'none';
-      element.letterCopyWrap.style.pointerEvents = 'auto';
-    }, [], `completion+=${duration(1.5)}`);
     timeline.to(element.stageHint, { opacity: 0, y: 5, duration: duration(0.5) }, 'completion');
     timeline.to(
       element.continueButton,
