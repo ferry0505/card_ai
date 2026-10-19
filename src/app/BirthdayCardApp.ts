@@ -142,7 +142,6 @@ export class BirthdayCardApp {
   /** 再次阅读不刷新页面：重建时间轴与装饰，回到封存状态。 */
   private reset(): void {
     if (this.state.value !== 'finale') return;
-    this.fallbackCompletion?.kill();
     this.sound.stopAll();
     this.ceremony.kill();
     this.tilt.stop();
