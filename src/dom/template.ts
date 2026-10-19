@@ -13,23 +13,36 @@ const escapeHtml = (value: string): string =>
   });
 
 const coverBotanical = `
-  <svg class="cover-botanical" viewBox="0 0 320 220" aria-hidden="true" focusable="false">
-    <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M34 186C55 169 67 146 69 115C71 84 83 59 108 42" />
-      <path d="M69 120C52 113 43 101 41 85C57 87 69 98 72 113" />
-      <path d="M72 101C87 95 98 83 102 66C87 69 75 79 70 93" />
-      <path d="M58 151C43 148 33 140 27 126C43 125 56 134 63 145" />
-      <path d="M286 34C266 50 253 73 249 103C246 134 232 158 207 175" />
-      <path d="M249 99C266 106 276 117 279 133C263 132 251 122 247 107" />
-      <path d="M246 118C231 123 219 135 215 152C231 149 243 139 248 126" />
-      <path d="M260 68C276 71 287 79 293 93C276 94 264 85 257 74" />
-      <path d="M108 42c8-8 17-10 26-6c-3 11-12 17-26 18c-6-4-6-8 0-12Z" />
-      <path d="M207 175c-8 8-17 10-26 6c3-11 12-17 26-18c6 4 6 8 0 12Z" />
-      <circle cx="118" cy="37" r="2.3" />
-      <circle cx="198" cy="181" r="2.3" />
+  <svg class="cover-botanical cover-mechanics" viewBox="0 0 320 220" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f1e6bd"/><stop offset=".48" stop-color="#a9b8b6"/><stop offset="1" stop-color="#d8c48b"/></linearGradient>
+      <linearGradient id="wood" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#29485a"/><stop offset=".5" stop-color="#6b8b9b"/><stop offset="1" stop-color="#29485a"/></linearGradient>
+    </defs>
+    <g fill="none" stroke="url(#brass)" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M35 46L96 82L143 57L191 95L275 56" stroke-width="7" opacity=".85"/>
+      <path d="M49 170L104 136L153 162L215 127L271 164" stroke-width="5" opacity=".72"/>
+      <path d="M96 82L104 136M191 95L215 127" stroke-width="5"/>
+      <path d="M33 46L33 170M275 56L271 164" stroke-width="3" stroke-dasharray="3 8" opacity=".8"/>
+    </g>
+    <g fill="url(#wood)" stroke="url(#brass)" stroke-width="2.5">
+      <circle cx="96" cy="82" r="19"/><circle cx="191" cy="95" r="17"/>
+      <circle cx="104" cy="136" r="14"/><circle cx="215" cy="127" r="14"/>
+    </g>
+    <g fill="url(#brass)" stroke="#31566b" stroke-width="2">
+      <circle cx="96" cy="82" r="6"/><circle cx="191" cy="95" r="5"/>
+      <circle cx="104" cy="136" r="4.5"/><circle cx="215" cy="127" r="4.5"/>
+      <circle cx="33" cy="46" r="5"/><circle cx="33" cy="170" r="5"/>
+      <circle cx="275" cy="56" r="5"/><circle cx="271" cy="164" r="5"/>
+    </g>
+    <g transform="translate(246 88)" fill="url(#brass)" stroke="#31566b" stroke-width="2">
+      <path d="M0-26L7-20L17-21L19-11L26-5L22 4L25 14L15 18L10 27L1 23L-8 27L-13 18L-23 15L-20 5L-26-3L-19-11L-18-21L-8-20Z"/>
+      <circle r="10" fill="#365d73"/><circle r="4" fill="#f1e6bd"/>
+    </g>
+    <g fill="none" stroke="#d8c48b" stroke-width="1.4" opacity=".75">
+      <path d="M42 28h52M42 34h32M221 190h53M238 196h36"/>
+      <path d="M145 28l5 8 5-8 5 8 5-8"/>
     </g>
   </svg>`;
-
 const paperBotanical = `
   <svg class="paper-botanical paper-botanical--top" viewBox="0 0 150 120" aria-hidden="true" focusable="false">
     <g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
@@ -104,14 +117,7 @@ export const createTemplate = (): string => {
                       <p class="reveal-target">${escapeHtml(copy.letter.date)}</p>
                     </div>
                   </div>
-                  <canvas
-                    class="reveal-canvas"
-                    data-reveal-canvas
-                    tabindex="-1"
-                    role="application"
-                    aria-label="${escapeHtml(copy.controls.revealAria)}"
-                  ></canvas>
-                  <div class="reveal-glow" data-reveal-glow aria-hidden="true"></div>
+
                 </div>
 
                 <div class="finale-content" data-finale-content aria-live="polite" aria-hidden="true">
