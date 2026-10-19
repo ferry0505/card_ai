@@ -659,3 +659,26 @@
   letter-spacing: .04em;
   text-indent: 0;
 }
+
+/* Keep all conspicuous mechanics on the cover's central seal; side edges are quiet wooden rails. */
+.puppet-hardware {
+  width: 7px;
+  top: 13%;
+  bottom: 13%;
+  border: 1px solid rgba(188, 203, 201, .42);
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(67,94,107,.52), rgba(191,202,192,.65) 48%, rgba(67,94,107,.5));
+  box-shadow: 0 1px 3px rgba(19,39,51,.14), inset 0 0 0 1px rgba(226,231,213,.16);
+  opacity: .58;
+}
+.puppet-hardware--left { left: 4px; }
+.puppet-hardware--right { right: 4px; }
+.puppet-hardware i { width: 4px; height: 4px; border: 1px solid rgba(221,218,190,.58); box-shadow: none; opacity: .65; }
+.puppet-hardware::before,
+.puppet-hardware::after { display: none !important; }
+.cover-mechanics {
+  width: 82%;
+  height: 72%;
+  opacity: .74;
+  filter: drop-shadow(0 2px 2px rgba(12,31,43,.38));
+}
