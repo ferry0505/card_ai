@@ -145,15 +145,13 @@ export const createTemplate = (): string => {
 
               <button class="wax-seal" data-wax-seal type="button" aria-label="${escapeHtml(copy.controls.sealAria)}">
                 <span class="wax-base" aria-hidden="true"></span>
-                <span class="wax-fragment wax-fragment--one" aria-hidden="true"></span>
-                <span class="wax-fragment wax-fragment--two" aria-hidden="true"></span>
-                <span class="wax-fragment wax-fragment--three" aria-hidden="true"></span>
-                <svg class="wax-cracks" viewBox="0 0 84 84" aria-hidden="true" focusable="false">
-                  <path pathLength="1" d="M42 18 38 34 45 43 37 52 40 68" />
-                  <path pathLength="1" d="M44 42 58 35 66 39" />
-                  <path pathLength="1" d="M38 34 25 29 18 34" />
-                  <path pathLength="1" d="M37 52 26 58 22 66" />
-                </svg>
+                <span class="mechanism-leaf mechanism-leaf--one" aria-hidden="true"></span>
+                <span class="mechanism-leaf mechanism-leaf--two" aria-hidden="true"></span>
+                <span class="mechanism-leaf mechanism-leaf--three" aria-hidden="true"></span>
+                <span class="mechanism-gear" aria-hidden="true"></span>
+                <span class="mechanism-bolt mechanism-bolt--one" aria-hidden="true"></span>
+                <span class="mechanism-bolt mechanism-bolt--two" aria-hidden="true"></span>
+                <span class="mechanism-bolt mechanism-bolt--three" aria-hidden="true"></span>
                 <span class="wax-monogram" aria-hidden="true">${escapeHtml(copy.decorative.waxMonogram)}</span>
               </button>
             </div>
