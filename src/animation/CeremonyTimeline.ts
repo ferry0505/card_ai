@@ -102,55 +102,46 @@ export class CeremonyTimeline {
     timeline.to([waxBase, waxMonogram], { scale: 0.72, opacity: 0, duration: duration(0.42), ease: 'power2.in' }, duration(0.72));
     timeline.to(element.waxSeal, { autoAlpha: 0, scale: 0.86, rotate: 24, duration: duration(0.34), pointerEvents: 'none' }, duration(0.98));
 
-    timeline.call(this.callbacks.onPaperSound, [], duration(0.66));
-    // 云幕先像舞台帷幕一样缓慢分开，再露出木盒剧场。
+    // 第一幕：薄雾散开；第二幕：盒盖左右打开；最后才让信件从盒中升起。
+    timeline.call(this.callbacks.onPaperSound, [], duration(0.78));
     timeline.to(cloudCurtains.filter((_, index) => index === 0), {
-      xPercent: -118, autoAlpha: 0.12, duration: duration(1.95), ease: 'power2.inOut',
-    }, duration(0.56));
+      xPercent: -132, autoAlpha: 0.08, duration: duration(1.7), ease: 'power2.inOut',
+    }, duration(0.58));
     timeline.to(cloudCurtains.filter((_, index) => index === 1), {
-      xPercent: 118, autoAlpha: 0.12, duration: duration(1.95), ease: 'power2.inOut',
-    }, duration(0.56));
-    timeline.to(
-      element.pageLeft,
-      {
-        rotateY: -148,
-        boxShadow: '3px 18px 35px rgba(48, 31, 36, .12)',
-        duration: duration(1.8),
-        ease: 'power2.inOut',
-      },
-      duration(0.72),
-    );
-    timeline.to(
-      element.pageRight,
-      {
-        rotateY: 148,
-        boxShadow: '-3px 18px 35px rgba(48, 31, 36, .12)',
-        duration: duration(1.8),
-        ease: 'power2.inOut',
-      },
-      duration(0.79),
-    );
-    timeline.to(
-      element.letterSheet,
-      { autoAlpha: 1, y: 34, scale: 0.87, rotateZ: -0.8, duration: duration(0.82), ease: 'power3.out' },
-      duration(1.02),
-    );
+      xPercent: 132, autoAlpha: 0.08, duration: duration(1.7), ease: 'power2.inOut',
+    }, duration(0.58));
+
+    // 盒子先完整打开，给观众一个能看清木盒内部的停顿。
+    timeline.to(element.pageLeft, {
+      rotateY: -158,
+      boxShadow: '3px 18px 35px rgba(48, 31, 36, .12)',
+      duration: duration(1.12),
+      ease: 'power3.inOut',
+    }, duration(1.72));
+    timeline.to(element.pageRight, {
+      rotateY: 158,
+      boxShadow: '-3px 18px 35px rgba(48, 31, 36, .12)',
+      duration: duration(1.12),
+      ease: 'power3.inOut',
+    }, duration(1.8));
+
+    // 盒盖打开后，信纸再从盒内升起，不再与翻盖动作重叠。
+    timeline.to(element.letterSheet, {
+      autoAlpha: 1, y: 38, scale: 0.82, rotateZ: -1.1,
+      duration: duration(0.78), ease: 'power3.out',
+    }, duration(3.02));
 
     if (!reducedMotion) this.addDecorationMotion(timeline, decorations, duration);
 
-    timeline.to(
-      element.letterSheet,
-      { y: 0, scale: 1, rotateZ: 0, duration: duration(1.2), ease: 'power3.out' },
-      duration(2.22),
-    );
-    timeline.to(
-      shellParts,
-      { opacity: 0.08, y: 22, duration: duration(0.9), ease: 'sine.inOut' },
-      duration(2.65),
-    );
-    timeline.call(this.callbacks.onRevealReady, [], duration(3.35));
-    timeline.to(element.stageHint, { opacity: 1, y: 0, duration: duration(0.45), ease: 'sine.inOut' }, duration(3.38));
-    timeline.addLabel('completion', duration(3.9));
+    timeline.to(element.letterSheet, {
+      y: 0, scale: 1, rotateZ: 0, duration: duration(0.9), ease: 'power3.out',
+    }, duration(3.82));
+    timeline.to(shellParts, {
+      opacity: 0.08, y: 22, duration: duration(0.72), ease: 'sine.inOut',
+    }, duration(4.02));
+    timeline.call(this.callbacks.onRevealReady, [], duration(4.65));
+    timeline.to(element.stageHint, { opacity: 1, y: 0, duration: duration(0.45), ease: 'sine.inOut' }, duration(4.68));
+    timeline.addLabel('completion', duration(5.15));
 
     timeline.to(
       element.letterCopy,
