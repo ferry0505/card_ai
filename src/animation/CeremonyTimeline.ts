@@ -34,6 +34,8 @@ export class CeremonyTimeline {
     const fragments = Array.from(element.waxSeal.querySelectorAll<HTMLElement>('.wax-fragment'));
     const waxBase = element.waxSeal.querySelector<HTMLElement>('.wax-base');
     const waxMonogram = element.waxSeal.querySelector<HTMLElement>('.wax-monogram');
+    const cloudCurtains = Array.from(element.experience.querySelectorAll<HTMLElement>('.cloud-curtain'));
+    gsap.set(cloudCurtains, { xPercent: 0, autoAlpha: 1 });
     const shellParts = [
       element.pageLeft,
       element.pageRight,
@@ -105,6 +107,13 @@ export class CeremonyTimeline {
     timeline.to(element.waxSeal, { autoAlpha: 0, duration: duration(0.28), pointerEvents: 'none' }, duration(0.84));
 
     timeline.call(this.callbacks.onPaperSound, [], duration(0.66));
+    // 云幕先像舞台帷幕一样缓慢分开，再露出木盒剧场。
+    timeline.to(cloudCurtains.filter((_, index) => index === 0), {
+      xPercent: -118, autoAlpha: 0.12, duration: duration(1.95), ease: 'power2.inOut',
+    }, duration(0.56));
+    timeline.to(cloudCurtains.filter((_, index) => index === 1), {
+      xPercent: 118, autoAlpha: 0.12, duration: duration(1.95), ease: 'power2.inOut',
+    }, duration(0.56));
     timeline.to(
       element.pageLeft,
       {
