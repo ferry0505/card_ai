@@ -682,3 +682,12 @@
   opacity: .74;
   filter: drop-shadow(0 2px 2px rgba(12,31,43,.38));
 }
+
+/* The cover reads as a crafted storybook cabinet: carved wood, enamel inlay, and a single central latch. */
+.cover-botanical.cover-mechanics {
+  width: 84%;
+  height: 75%;
+  opacity: .9;
+  filter: drop-shadow(0 3px 3px rgba(10,27,38,.42));
+}
+.cover-copy { letter-spacing: .22em; }
