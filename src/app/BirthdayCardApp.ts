@@ -58,6 +58,17 @@ export class BirthdayCardApp {
   private bindEvents(): void {
     const signal = this.abortController.signal;
     this.elements.waxSeal.addEventListener('click', () => this.open(), { signal });
+    // Keep mouse-wheel and trackpad scrolling reliable inside the long letter.
+    this.elements.letterCopyWrap.addEventListener('wheel', (event) => {
+      const container = this.elements.letterCopyWrap;
+      const maxScroll = container.scrollHeight - container.clientHeight;
+      if (maxScroll <= 0 || event.deltaY === 0) return;
+      const nextScroll = Math.max(0, Math.min(maxScroll, container.scrollTop + event.deltaY));
+      if (nextScroll !== container.scrollTop) {
+        container.scrollTop = nextScroll;
+        event.preventDefault();
+      }
+    }, { signal, passive: false });
     // 封面是整座剧场：点击场景任意空白处都能拉开云幕。
     this.root.querySelector<HTMLElement>('[data-scene]')?.addEventListener('click', (event) => {
       if (this.state.value !== 'sealed') return;
