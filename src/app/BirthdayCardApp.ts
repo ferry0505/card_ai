@@ -76,6 +76,13 @@ export class BirthdayCardApp {
   private bindEvents(): void {
     const signal = this.abortController.signal;
     this.elements.waxSeal.addEventListener('click', () => this.open(), { signal });
+    // 封面是整座剧场：点击场景任意空白处都能拉开云幕。
+    this.root.querySelector<HTMLElement>('[data-scene]')?.addEventListener('click', (event) => {
+      if (this.state.value !== 'sealed') return;
+      const target = event.target;
+      if (target instanceof Element && target.closest('button, a, input, textarea, select')) return;
+      this.open();
+    }, { signal });
     this.elements.continueButton.addEventListener('click', () => this.continueToFinale(), { signal });
     this.elements.replayButton.addEventListener('click', () => this.reset(), { signal });
     this.elements.soundButton.addEventListener('click', () => void this.toggleSound(), { signal });
