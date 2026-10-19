@@ -51,7 +51,14 @@ const paperBotanical = `
 export const createTemplate = (): string => {
   const copy = cardContent;
   const wishLines = copy.letter.wishes
-    .map((line) => `<span class="reveal-line reveal-target">${escapeHtml(line)}</span>`)
+    .map((line, index) => {
+      const sticker = index === 1
+        ? '<figure class="letter-sticker letter-sticker--postcard"><img src="./images/winter-postcard.svg" alt="雪夜小屋插画" loading="lazy"><figcaption>把一盏灯，留给冬夜。</figcaption></figure>'
+        : index === 3
+          ? '<figure class="letter-sticker letter-sticker--snow"><img src="./images/snowflake-sticker.svg" alt="雪花装饰" loading="lazy"></figure>'
+          : '';
+      return `<span class="reveal-line reveal-target">${escapeHtml(line)}</span>${sticker}`;
+    })
     .join('');
   const finaleLines = copy.finale.wishes
     .map((line) => `<p class="finale-line">${escapeHtml(line)}</p>`)
@@ -64,12 +71,18 @@ export const createTemplate = (): string => {
       <div class="botanical-shadow botanical-shadow--left" aria-hidden="true"></div>
       <div class="botanical-shadow botanical-shadow--right" aria-hidden="true"></div>
 
-      <section class="scene" aria-label="${escapeHtml(copy.accessibility.sceneLabel)}">
+      <section class="scene" data-scene aria-label="${escapeHtml(copy.accessibility.sceneLabel)}">
+        <div class="cloud-curtain cloud-curtain--left" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="cloud-curtain cloud-curtain--right" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="snow-specks" aria-hidden="true"></div>
         <div class="card-stage" data-card-stage>
           <div class="card-float" data-card-float>
             <div class="card-book" data-card-book>
               <div class="card-depth" aria-hidden="true"></div>
+              <div class="puppet-hardware puppet-hardware--left" aria-hidden="true"><i></i><i></i><i></i></div>
+              <div class="puppet-hardware puppet-hardware--right" aria-hidden="true"><i></i><i></i><i></i></div>
               <div class="card-inner" aria-hidden="true">
+                <span class="theatre-curtain theatre-curtain--left"></span><span class="theatre-curtain theatre-curtain--right"></span>
                 <span class="card-inner-mark">${escapeHtml(copy.decorative.innerMark)}</span>
               </div>
 
