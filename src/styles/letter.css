@@ -288,3 +288,10 @@
   .letter-copy { padding-block: 2%; }
   .letter-sticker--postcard { gap: 5px; padding: 5px; }
 }
+
+
+.letter-copy {
+  position: relative;
+  inset: auto;
+  min-height: 100%;
+}
