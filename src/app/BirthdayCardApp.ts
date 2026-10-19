@@ -75,7 +75,6 @@ export class BirthdayCardApp {
   }
 
   private prepareRun(): void {
-    this.fallbackCompletion?.kill();
     this.decorationSet = this.decorations.build(this.elements.cardBook, this.motionQuery.matches);
     this.ceremony.rebuild(this.decorationSet, this.motionQuery.matches);
     this.elements.finaleContent.setAttribute('aria-hidden', 'true');
@@ -103,6 +102,7 @@ export class BirthdayCardApp {
   private startReveal(): void {
     if (!this.state.advance('opening')) return;
     // 开盒动画结束后直接呈现完整信件，不再要求用户擦除遮罩。
+    this.state.advance('revealing');
     this.state.advance('revealing');
     this.elements.stageHint.textContent = cardContent.hints.revealing;
     this.elements.srStatus.textContent = cardContent.accessibility.openedStatus;
@@ -139,7 +139,7 @@ export class BirthdayCardApp {
     this.elements.replayButton.focus({ preventScroll: true });
   }
 
-  /** 再次阅读不刷新页面：清空旧时间轴、遮罩、装饰和内联状态后创建全新一次运行。 */
+  /** 再次阅读不刷新页面：重建时间轴与装饰，回到封存状态。 */
   private reset(): void {
     if (this.state.value !== 'finale') return;
     this.fallbackCompletion?.kill();
