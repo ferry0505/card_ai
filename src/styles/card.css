@@ -691,3 +691,8 @@
   filter: drop-shadow(0 3px 3px rgba(10,27,38,.42));
 }
 .cover-copy { letter-spacing: .22em; }
+
+/* Remove the two decorative gear medallions on the upper corners of the cover leaves. */
+.card-page .page-face--front::after {
+  display: none !important;
+}
