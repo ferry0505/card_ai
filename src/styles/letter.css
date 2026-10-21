@@ -381,3 +381,31 @@
   .phase-finale .finale-image { margin-top: clamp(0.6rem, 1.5vh, 1rem); }
   .phase-finale .finale-image img { max-width: min(100%, 240px); max-height: min(20dvh, 135px); }
 }
+
+
+/* The finale artwork must not appear on the normal letter-reading page. */
+.finale-image {
+  display: none !important;
+}
+.phase-finale .finale-image {
+  display: flex !important;
+  margin-top: clamp(1rem, 2.8vh, 1.6rem);
+  transform: translateY(12px);
+}
+.phase-finale .finale-image img {
+  width: auto;
+  height: auto;
+  max-width: min(76%, 230px);
+  max-height: min(18dvh, 125px);
+  object-fit: contain;
+}
+@media (max-width: 680px) {
+  .phase-finale .finale-image {
+    margin-top: clamp(0.8rem, 2.2vh, 1.2rem);
+    transform: translateY(10px);
+  }
+  .phase-finale .finale-image img {
+    max-width: min(72%, 190px);
+    max-height: min(16dvh, 105px);
+  }
+}
