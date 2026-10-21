@@ -45,6 +45,7 @@ export class CeremonyTimeline {
     const letterStickers = Array.from(element.letterCopy.querySelectorAll<HTMLElement>('.letter-sticker'));
     const finaleLines = Array.from(element.finaleContent.querySelectorAll<HTMLElement>('.finale-line'));
     const finaleFooter = element.finaleContent.querySelector<HTMLElement>('.finale-footer');
+    const finaleImage = element.finaleContent.querySelector<HTMLElement>('.finale-image');
 
     gsap.set(element.pageLeft, { rotateY: 0, autoAlpha: 1, boxShadow: '10px 13px 24px rgba(48, 31, 36, .24)' });
     gsap.set(element.pageRight, { rotateY: 0, autoAlpha: 1, boxShadow: '-10px 13px 24px rgba(48, 31, 36, .24)' });
@@ -64,7 +65,7 @@ export class CeremonyTimeline {
     gsap.set(element.birthdayLine, { x: 0, y: 0, scale: 1, opacity: 1, transformOrigin: 'left center' });
     gsap.set(element.finaleContent, { opacity: 1 });
     gsap.set(element.finaleTitle, { opacity: 0, y: 7 });
-    gsap.set([...finaleLines, ...(finaleFooter ? [finaleFooter] : [])], { opacity: 0, y: 10 });
+    gsap.set([...finaleLines, ...(finaleFooter ? [finaleFooter] : []), ...(finaleImage ? [finaleImage] : [])], { opacity: 0, y: 10 });
     gsap.set(element.botanicalShadows, { opacity: 0, scale: 0.96 });
     gsap.set(element.continueButton, { autoAlpha: 0, y: 8, pointerEvents: 'none' });
     gsap.set(element.replayButton, { opacity: 0, y: 8, pointerEvents: 'none' });
@@ -214,6 +215,13 @@ export class CeremonyTimeline {
         finaleFooter,
         { opacity: 1, y: 0, duration: duration(0.48), ease: 'sine.inOut' },
         `finale+=${duration(4.18)}`,
+      );
+    }
+    if (finaleImage) {
+      timeline.to(
+        finaleImage,
+        { opacity: 1, y: 0, duration: duration(0.62), ease: 'sine.inOut' },
+        `finale+=${duration(4.05)}`,
       );
     }
     timeline.to(
