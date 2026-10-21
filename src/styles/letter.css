@@ -354,3 +354,30 @@
   left: 0;
   margin-inline: auto;
 }
+
+
+/* Image placed below the finale wishes, above the fixed footer. */
+.phase-finale .finale-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: clamp(0.8rem, 2.2vh, 1.4rem) auto 0;
+  flex: 0 1 auto;
+  min-height: 0;
+}
+.phase-finale .finale-image img {
+  display: block;
+  width: auto;
+  max-width: min(100%, 300px);
+  max-height: min(24dvh, 170px);
+  height: auto;
+  object-fit: contain;
+  border-radius: 3px;
+  box-shadow: 0 5px 18px rgba(69, 50, 46, 0.14);
+}
+@media (max-width: 680px) {
+  .phase-finale .finale-content { padding: 13% 8% 15%; }
+  .phase-finale .finale-image { margin-top: clamp(0.6rem, 1.5vh, 1rem); }
+  .phase-finale .finale-image img { max-width: min(100%, 240px); max-height: min(20dvh, 135px); }
+}
