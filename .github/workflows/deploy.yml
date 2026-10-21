@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - feat/christmas-puppet-theatre
   workflow_dispatch:
 
 permissions:
