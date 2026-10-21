@@ -147,3 +147,5 @@ GitHub Pages 是最推荐、最适合普通用户的方式。如需使用其他�
 ## 项目说明
 
 - 技术栈：Vite、TypeScript、GSAP、Canvas 2D、CSS 3D Transform、原生 HTML/CSS/SVG。
+
+> 发布设置：仓库 Settings → Pages → Build and deployment → Source 选择 `GitHub Actions`。部署工作流会在提交到 `feat/christmas-puppet-theatre` 后自动运行。
