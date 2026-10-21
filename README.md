@@ -1,6 +1,6 @@
 # 雪幕之下 · 圣诞来信
 
-> 本分支是基于原模板的圣诞木偶剧场改造预览。未合并到 main，也没有部署。
+> 本分支是基于原模板的圣诞木偶剧场改造版本。通过 GitHub Actions 部署此分支，不修改原始 main 分支。
 
 ## 本次改造
 
@@ -20,8 +20,9 @@ npm run dev
 ### 自定义信件与图片
 
 - 文案与颜色：`src/config/content.ts`
-- 插画：`public/images/`（可替换 `winter-postcard.svg`、`snowflake-sticker.svg`，也可添加自己的图片）
-- 本分支尚未部署；请先本地预览与检查，再决定是否合并或发布。
+- 插画：`public/images/`（可在 GitHub 网页端上传替换同名文件，或添加新文件后调整模板中的图片路径）
+- 背景音乐：`src/assets/audio/happybirthday.mp3`（上传新的 MP3 并替换同名文件即可；保持文件名不变，不需要改代码）
+- 自动部署：提交到 `feat/christmas-puppet-theatre` 分支后，GitHub Actions 会自动构建并部署。
 
 ---
 
@@ -47,7 +48,7 @@ npm run dev
 5. 创建完成后，打开 [src/config/content.ts](src/config/content.ts)。
 6. 点击文件页面右上角的铅笔按钮进入编辑。
 7. 修改姓名、祝福、署名、日期和配色，注意保留原有引号、逗号和括号。
-8. 点击 **Commit changes**，将修改提交到 `main` 分支。
+8. 点击 **Commit changes**，将修改提交到 `feat/christmas-puppet-theatre` 分支。
 9. 打开仓库的 **Settings → Pages**。
 10. 在 **Build and deployment** 中将 **Source** 设置为 **GitHub Actions**。
 11. 打开仓库的 **Actions** 页面，等待部署任务出现绿色对勾。
@@ -57,6 +58,13 @@ npm run dev
    https://你的用户名.github.io/你的仓库名/
    ```
 
+
+## 在 GitHub 网页端修改文字、图片和音乐
+
+- **文字与颜色**：打开 `src/config/content.ts`，点击铅笔按钮，只改引号中的文案或颜色值，然后提交到 `feat/christmas-puppet-theatre`。
+- **图片**：进入 `public/images/`，用 **Add file → Upload files** 上传图片。替换现有图片时尽量沿用原文件名；若使用新文件名，还需要修改 `src/dom/template.ts` 中对应的图片路径。
+- **背景音乐**：音乐文件为 `src/assets/audio/happybirthday.mp3`。准备好有使用权的 MP3 后，在 GitHub 仓库页面进入 `src/assets/audio/`，通过 **Add file → Upload files** 上传同名 `happybirthday.mp3` 并提交替换。保持文件名不变即可，无需改动播放器代码。
+- **发布**：每次提交到 `feat/christmas-puppet-theatre` 后，打开 **Actions** 查看 `Deploy to GitHub Pages` 工作流，绿色对勾表示构建和部署成功。通常等一两分钟后再刷新网页。
 
 ## 修改文案与配色
 
@@ -83,7 +91,7 @@ npm run dev
 
 ## GitHub Pages 自动部署
 
-仓库已经包含 [.github/workflows/deploy.yml](.github/workflows/deploy.yml)。每次向 `main` 分支提交后，它会自动：
+仓库已经包含 [.github/workflows/deploy.yml](.github/workflows/deploy.yml)。当前版本从 `feat/christmas-puppet-theatre` 分支发布，以保持原始 `main` 分支不变。每次向该分支提交后，它会自动：
 
 1. 执行 `npm ci` 安装锁定版本的依赖；
 2. 执行 `npm run build` 完成 TypeScript 检查和生产构建；
