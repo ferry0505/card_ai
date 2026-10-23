@@ -122,7 +122,7 @@ export const createTemplate = (): string => {
                 <div class="finale-content" data-finale-content aria-live="polite" aria-hidden="true">
                   <h1 class="finale-title" data-finale-title>${escapeHtml(copy.finale.title)}</h1>
                   <div class="finale-wishes">${finaleLines}</div>
-                  <figure class="finale-image"><img src="./images/3313A71520B3875BD5C5EF48D39A53AC.jpg" alt="终章祝福插图" loading="lazy"></figure>
+                  <figure class="finale-image"><img src="./images/0A394902738AD3994F4ECBA595B99B09.jpg" alt="终章祝福插图" loading="lazy"></figure>
                   <p class="finale-footer">${escapeHtml(copy.finale.footer)}</p>
                 </div>
               </article>
