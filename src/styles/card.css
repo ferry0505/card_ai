@@ -404,3 +404,295 @@
   transform: rotate(-20deg) skewX(12deg);
   border-radius: 12% 75% 18% 72%;
 }
+
+
+/* Winter wood and brushed-metal details override the base botanical-card palette. */
+.experience {
+  background:
+    radial-gradient(ellipse at 50% 72%, rgba(255,255,255,.96) 0 8%, rgba(235,246,251,.84) 30%, transparent 58%),
+    radial-gradient(circle at 16% 16%, rgba(255,255,255,.72), transparent 28%),
+    linear-gradient(180deg, #c8dfeb 0%, #dceaf2 52%, #edf5f8 100%);
+}
+.card-depth {
+  background: repeating-linear-gradient(90deg, rgba(255,226,184,.06) 0 2px, transparent 2px 11px), linear-gradient(90deg, #3c5666, #59798b 48%, #344f60);
+  border: 2px solid #9bb6c2;
+  box-shadow: 0 28px 50px rgba(45,75,92,.26), inset 0 0 0 5px rgba(231,244,250,.16);
+}
+.card-inner {
+  border: 2px solid rgba(210,198,154,.8);
+  background: repeating-linear-gradient(90deg, rgba(40,69,84,.12) 0 2px, transparent 2px 13px), linear-gradient(135deg, #a9c5d3, #d5e5ec 52%, #90b2c4);
+  color: rgba(36,65,82,.76);
+}
+.card-inner::before { inset: 13px; border: 1px solid rgba(245,250,252,.72); }
+.card-page .page-face--front {
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,.045) 0 2px, transparent 2px 10px), repeating-linear-gradient(3deg, rgba(25,46,57,.07) 0 1px, transparent 1px 8px), linear-gradient(90deg, #44677b, #5d8295 52%, #36576b);
+  color: #e8e0bf;
+}
+.page-face--front::before { border-color: rgba(222,213,175,.7); }
+.page-face--back { background: repeating-linear-gradient(90deg, rgba(52,86,104,.06) 0 2px, transparent 2px 10px), #d9e8ee; }
+.cover-copy { color: #f1e8c7; text-shadow: 0 2px 8px rgba(22,48,63,.3); }
+.wax-base, .wax-fragment {
+  background: radial-gradient(circle at 35% 25%, #d8eef4, #6c9bb2 52%, #31586e 100%);
+  border-color: rgba(234,242,224,.6);
+  box-shadow: inset 0 0 0 4px rgba(42,77,96,.24), inset 3px 4px 7px rgba(255,255,255,.22), 0 2px 0 #294b5e;
+}
+.wax-seal { color: #f4e8c5; }
+.wax-monogram { border-color: rgba(240,230,193,.78); }
+
+
+/* Puppet-punk mechanics: visibly jointed timber panels, hinge plates and exposed gears. */
+.card-depth {
+  background:
+    repeating-linear-gradient(90deg, rgba(229,205,155,.13) 0 2px, transparent 2px 13px),
+    repeating-linear-gradient(4deg, rgba(17,38,50,.14) 0 1px, transparent 1px 18px),
+    linear-gradient(90deg, #263f4c 0%, #5c7884 18%, #355464 50%, #688694 78%, #263f4c 100%);
+  border: 4px solid #b8aa7e;
+  outline: 1px solid rgba(31,55,66,.75);
+  box-shadow: 0 30px 52px rgba(29,52,64,.34), inset 0 0 0 5px rgba(222,209,163,.32), inset 0 0 0 9px rgba(20,43,55,.32);
+}
+.card-inner {
+  background:
+    repeating-linear-gradient(90deg, rgba(231,207,158,.14) 0 2px, transparent 2px 17px),
+    repeating-linear-gradient(2deg, rgba(25,45,55,.12) 0 1px, transparent 1px 24px),
+    linear-gradient(135deg, #91adba, #4f7183 48%, #9ab6c1);
+  border: 4px ridge #d1c49b;
+  box-shadow: inset 0 0 0 5px rgba(39,68,83,.5), inset 0 0 0 8px rgba(226,215,175,.52);
+}
+.card-page .page-face--front {
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 29px, rgba(225,207,164,.22) 30px, transparent 32px),
+    repeating-linear-gradient(2deg, rgba(18,38,49,.17) 0 1px, transparent 1px 21px),
+    linear-gradient(90deg, #274858 0%, #42687a 24%, #315669 50%, #52798a 75%, #274858 100%);
+  border: 2px solid #c6b98d;
+  box-shadow: inset 0 0 0 5px rgba(25,48,61,.65), inset 0 0 0 8px rgba(224,207,155,.42), inset 0 0 22px rgba(9,27,38,.38);
+}
+.card-page .page-face--front::before {
+  inset: 12px;
+  border: 2px solid rgba(220,204,153,.8);
+  box-shadow: inset 0 0 0 4px rgba(25,49,62,.45);
+}
+.card-page .page-face--front::after {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  right: 12%;
+  bottom: 12%;
+  width: clamp(34px, 6vw, 58px);
+  aspect-ratio: 1;
+  border: 3px solid #d7c79a;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, #dce0c8 0 8%, #4d6c7a 10% 24%, transparent 27%),
+    repeating-conic-gradient(from 0deg, #d8c79a 0deg 10deg, #426477 10deg 20deg);
+  box-shadow: 0 3px 0 #1c3a4a, inset 0 0 0 4px #34596d, 0 0 0 3px rgba(21,43,55,.55);
+  opacity: .98;
+  pointer-events: none;
+}
+.cover-botanical.cover-mechanics {
+  z-index: 3;
+  width: 90%;
+  height: 78%;
+  opacity: .95;
+  color: #dfd0a1;
+  filter: drop-shadow(0 3px 2px rgba(12,31,43,.55));
+}
+.cover-copy {
+  z-index: 6;
+  color: #f0e5be;
+  text-shadow: 0 2px 0 #1c3a4b, 0 4px 8px rgba(9,25,35,.55);
+  letter-spacing: .28em;
+}
+.puppet-hardware {
+  z-index: 16;
+  top: 8%;
+  bottom: 8%;
+  width: 15px;
+  border: 2px solid #d6c69a;
+  border-radius: 3px;
+  background:
+    repeating-linear-gradient(180deg, transparent 0 13px, rgba(24,47,60,.85) 14px 17px),
+    linear-gradient(90deg, #4b6c7b, #e0d3a6 28%, #7b9299 56%, #2f5062);
+  box-shadow: 0 0 0 2px rgba(20,43,55,.78), inset 0 0 0 2px rgba(26,51,65,.58), 0 4px 6px rgba(13,30,41,.4);
+}
+.puppet-hardware--left { left: 2px; }
+.puppet-hardware--right { right: 2px; }
+.puppet-hardware i {
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #f0e3b8;
+  background: radial-gradient(circle at 30% 25%, #fff5d2 0 12%, #a9b8b3 30%, #506f7c 78%);
+  box-shadow: 0 1px 0 #203e4e, 0 0 0 2px rgba(23,44,55,.7);
+}
+.puppet-hardware i:nth-child(1) { top: 6%; }
+.puppet-hardware i:nth-child(2) { top: 48%; }
+.puppet-hardware i:nth-child(3) { bottom: 6%; }
+.puppet-hardware::before,
+.puppet-hardware::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 26px;
+  height: 26px;
+  transform: translateX(-50%);
+  border: 3px double #dfd0a0;
+  border-radius: 50%;
+  background: radial-gradient(circle, #c7c9b3 0 12%, #4c6b7a 17% 40%, #203f50 44% 55%, #c6b687 59% 66%, #385a6b 70%);
+  box-shadow: 0 2px 0 rgba(15,34,46,.7), 0 0 0 3px rgba(29,53,65,.55);
+}
+.puppet-hardware::before { top: 23%; }
+.puppet-hardware::after { bottom: 23%; }
+.theatre-curtain {
+  width: 11%;
+  border-left: 2px solid #d8c89a;
+  border-right: 2px solid #d8c89a;
+  background:
+    repeating-linear-gradient(90deg, #24475a 0 5px, #6c8c9a 5px 9px, #345b70 9px 14px),
+    linear-gradient(#54798a,#284b5f);
+  box-shadow: inset 0 0 0 3px rgba(22,44,57,.42), 0 0 0 1px rgba(222,206,157,.7);
+}
+.wax-base, .wax-fragment {
+  background:
+    radial-gradient(circle at 35% 25%, #e8dfbb, #9daea9 20%, #547c8d 52%, #24495d 100%);
+  border: 2px solid #d8c99b;
+  box-shadow: inset 0 0 0 4px rgba(28,57,72,.62), inset 3px 4px 7px rgba(255,255,255,.24), 0 3px 0 #203d4c;
+}
+.wax-seal { color: #f4e8c5; }
+.wax-monogram { border: 2px solid rgba(241,226,183,.92); }
+@media (max-width: 680px) {
+  .puppet-hardware { width: 11px; }
+  .puppet-hardware::before, .puppet-hardware::after { width: 19px; height: 19px; }
+  .card-page .page-face--front::after { width: 34px; }
+}
+
+
+/* 木制蜡封机关：铜齿轮、木叶片和铆钉共同构成开启结构。 */
+.wax-seal {
+  width: 104px;
+  min-width: 104px;
+  height: 104px;
+  min-height: 104px;
+  filter: drop-shadow(0 8px 5px rgba(18, 42, 55, .42));
+}
+.wax-seal::before {
+  inset: 11px;
+  border: 1px solid rgba(244, 226, 174, .7);
+  background: linear-gradient(135deg, rgba(255,255,255,.2), transparent 40%, rgba(14,35,47,.18));
+  animation: none;
+}
+.wax-base {
+  inset: 8px;
+  border: 4px ridge #d8c58f;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 24%, rgba(255,255,255,.28), transparent 24%),
+    repeating-conic-gradient(from 0deg, #8ca8ad 0deg 8deg, #d6c28a 8deg 12deg, #426779 12deg 20deg);
+  box-shadow: inset 0 0 0 4px #29495a, inset 0 0 0 7px #d3c18b, 0 4px 0 #203c4a;
+}
+.mechanism-gear {
+  position: absolute;
+  z-index: 4;
+  inset: 17px;
+  border: 4px double #e5d19a;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, #e7d7a7 0 7%, #3b6174 9% 22%, transparent 24%),
+    repeating-conic-gradient(from 0deg, #e1d09c 0deg 9deg, #577b8a 9deg 18deg);
+  box-shadow: inset 0 0 0 3px #284b5d, 0 2px 0 rgba(22,44,55,.6);
+  transform-origin: center;
+  will-change: transform;
+}
+.mechanism-gear::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 2px solid #f1e2b2;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px #345a6d;
+}
+.mechanism-leaf {
+  position: absolute;
+  z-index: 5;
+  inset: 15px;
+  border: 2px solid #e2d09b;
+  border-radius: 12px 12px 6px 6px;
+  transform-origin: 50% 82%;
+  background:
+    repeating-linear-gradient(90deg, rgba(25,50,63,.22) 0 2px, transparent 2px 7px),
+    linear-gradient(135deg, #a5b7ad 0%, #557b8d 24%, #345b70 66%, #203f51 100%);
+  box-shadow: inset 0 0 0 3px rgba(224,208,153,.72), inset 0 0 0 6px rgba(24,48,62,.48), 0 3px 0 #203b4b;
+  clip-path: polygon(50% 0, 100% 24%, 87% 100%, 13% 100%, 0 24%);
+  will-change: transform, opacity;
+}
+.mechanism-leaf--one { transform: rotate(-12deg); }
+.mechanism-leaf--two { transform: rotate(12deg); }
+.mechanism-leaf--three {
+  inset: 23px 17px 10px;
+  border-radius: 5px 5px 12px 12px;
+  transform-origin: 50% 15%;
+  clip-path: polygon(13% 0, 87% 0, 100% 76%, 50% 100%, 0 76%);
+}
+.mechanism-bolt {
+  position: absolute;
+  z-index: 7;
+  width: 8px;
+  height: 8px;
+  border: 2px solid #f2e3b5;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, #fff9d9, #9caeb0 46%, #35596a 80%);
+  box-shadow: 0 1px 1px rgba(14,35,46,.8);
+}
+.mechanism-bolt--one { top: 13px; left: 45px; }
+.mechanism-bolt--two { right: 13px; bottom: 30px; }
+.mechanism-bolt--three { left: 13px; bottom: 30px; }
+.wax-monogram {
+  z-index: 8;
+  width: 43px;
+  height: 43px;
+  border: 2px solid #e6d39a;
+  background: radial-gradient(circle at 30% 25%, #55798a, #234658 76%);
+  box-shadow: inset 0 0 0 3px rgba(226,209,154,.38), 0 2px 3px rgba(10,29,40,.5);
+  color: #f4e7bd;
+  font-size: .92rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-indent: 0;
+}
+
+/* Keep all conspicuous mechanics on the cover's central seal; side edges are quiet wooden rails. */
+.puppet-hardware {
+  width: 7px;
+  top: 13%;
+  bottom: 13%;
+  border: 1px solid rgba(188, 203, 201, .42);
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(67,94,107,.52), rgba(191,202,192,.65) 48%, rgba(67,94,107,.5));
+  box-shadow: 0 1px 3px rgba(19,39,51,.14), inset 0 0 0 1px rgba(226,231,213,.16);
+  opacity: .58;
+}
+.puppet-hardware--left { left: 4px; }
+.puppet-hardware--right { right: 4px; }
+.puppet-hardware i { width: 4px; height: 4px; border: 1px solid rgba(221,218,190,.58); box-shadow: none; opacity: .65; }
+.puppet-hardware::before,
+.puppet-hardware::after { display: none !important; }
+.cover-mechanics {
+  width: 82%;
+  height: 72%;
+  opacity: .74;
+  filter: drop-shadow(0 2px 2px rgba(12,31,43,.38));
+}
+
+/* The cover reads as a crafted storybook cabinet: carved wood, enamel inlay, and a single central latch. */
+.cover-botanical.cover-mechanics {
+  width: 84%;
+  height: 75%;
+  opacity: .9;
+  filter: drop-shadow(0 3px 3px rgba(10,27,38,.42));
+}
+.cover-copy { letter-spacing: .22em; }
+
+/* Remove the two decorative gear medallions on the upper corners of the cover leaves. */
+.card-page .page-face--front::after {
+  display: none !important;
+}

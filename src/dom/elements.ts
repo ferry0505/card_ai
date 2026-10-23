@@ -13,8 +13,6 @@ export interface AppElements {
   letterCopy: HTMLElement;
   birthdayLine: HTMLElement;
   revealTargets: HTMLElement[];
-  revealCanvas: HTMLCanvasElement;
-  revealGlow: HTMLElement;
   finaleContent: HTMLElement;
   finaleTitle: HTMLElement;
   stageHint: HTMLElement;
@@ -47,8 +45,6 @@ export const collectElements = (root: ParentNode): AppElements => ({
   letterCopy: find(root, '[data-letter-copy]'),
   birthdayLine: find(root, '[data-birthday-line]'),
   revealTargets: Array.from(root.querySelectorAll<HTMLElement>('.reveal-target')),
-  revealCanvas: find(root, '[data-reveal-canvas]'),
-  revealGlow: find(root, '[data-reveal-glow]'),
   finaleContent: find(root, '[data-finale-content]'),
   finaleTitle: find(root, '[data-finale-title]'),
   stageHint: find(root, '[data-stage-hint]'),

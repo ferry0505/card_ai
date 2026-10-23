@@ -14,7 +14,7 @@ interface CeremonyCallbacks {
 
 /**
  * 开封、翻页、补全、终章都编排在同一条主时间轴中。
- * 显影阶段由 addPause 暂停，覆盖率达标后从 completion 标签继续。
+ * 开封动画结束后直接进入阅读阶段，信件内容不再需要手动擦除显影。
  */
 export class CeremonyTimeline {
   private master: ReturnType<typeof gsap.timeline> | null = null;
@@ -30,18 +30,22 @@ export class CeremonyTimeline {
     const element = this.elements;
     const duration = (seconds: number): number =>
       reducedMotion ? Math.max(0.12, seconds * 0.24) : seconds;
-    const crackPaths = Array.from(element.waxSeal.querySelectorAll<SVGPathElement>('.wax-cracks path'));
-    const fragments = Array.from(element.waxSeal.querySelectorAll<HTMLElement>('.wax-fragment'));
+    const mechanismLeaves = Array.from(element.waxSeal.querySelectorAll<HTMLElement>('.mechanism-leaf'));
+    const mechanismGear = element.waxSeal.querySelector<HTMLElement>('.mechanism-gear');
     const waxBase = element.waxSeal.querySelector<HTMLElement>('.wax-base');
     const waxMonogram = element.waxSeal.querySelector<HTMLElement>('.wax-monogram');
+    const cloudCurtains = Array.from(element.experience.querySelectorAll<HTMLElement>('.cloud-curtain'));
+    gsap.set(cloudCurtains, { xPercent: 0, autoAlpha: 1 });
     const shellParts = [
       element.pageLeft,
       element.pageRight,
       ...Array.from(element.cardBook.querySelectorAll<HTMLElement>('.card-depth, .card-inner')),
     ];
     const fadeTargets = element.revealTargets.filter((target) => target !== element.birthdayLine);
+    const letterStickers = Array.from(element.letterCopy.querySelectorAll<HTMLElement>('.letter-sticker'));
     const finaleLines = Array.from(element.finaleContent.querySelectorAll<HTMLElement>('.finale-line'));
     const finaleFooter = element.finaleContent.querySelector<HTMLElement>('.finale-footer');
+    const finaleImage = element.finaleContent.querySelector<HTMLElement>('.finale-image');
 
     gsap.set(element.pageLeft, { rotateY: 0, autoAlpha: 1, boxShadow: '10px 13px 24px rgba(48, 31, 36, .24)' });
     gsap.set(element.pageRight, { rotateY: 0, autoAlpha: 1, boxShadow: '-10px 13px 24px rgba(48, 31, 36, .24)' });
@@ -59,17 +63,15 @@ export class CeremonyTimeline {
     gsap.set(element.paperOrnaments, { opacity: 1 });
     gsap.set(element.revealTargets, { x: 0, y: 0, scale: 1, opacity: 1 });
     gsap.set(element.birthdayLine, { x: 0, y: 0, scale: 1, opacity: 1, transformOrigin: 'left center' });
-    gsap.set(element.revealCanvas, { opacity: 1 });
     gsap.set(element.finaleContent, { opacity: 1 });
     gsap.set(element.finaleTitle, { opacity: 0, y: 7 });
-    gsap.set([...finaleLines, ...(finaleFooter ? [finaleFooter] : [])], { opacity: 0, y: 10 });
+    gsap.set([...finaleLines, ...(finaleFooter ? [finaleFooter] : []), ...(finaleImage ? [finaleImage] : [])], { opacity: 0, y: 10 });
     gsap.set(element.botanicalShadows, { opacity: 0, scale: 0.96 });
     gsap.set(element.continueButton, { autoAlpha: 0, y: 8, pointerEvents: 'none' });
     gsap.set(element.replayButton, { opacity: 0, y: 8, pointerEvents: 'none' });
     gsap.set(shellParts, { opacity: 1, filter: 'blur(0px)' });
     gsap.set(element.waxSeal, { autoAlpha: 1, scale: 1, rotate: 0, pointerEvents: 'auto' });
-    gsap.set([waxBase, waxMonogram, ...fragments], { opacity: 1 });
-    gsap.set(crackPaths, { opacity: 0, strokeDashoffset: 1 });
+    gsap.set([waxBase, waxMonogram, ...mechanismLeaves, mechanismGear].filter(Boolean), { opacity: 1, x: 0, y: 0, rotate: 0, scale: 1 });
     gsap.set(decorations.all, { opacity: 0, x: 0, y: 0, scale: 0.3, rotate: 0 });
 
     const timeline = gsap.timeline({
@@ -82,77 +84,67 @@ export class CeremonyTimeline {
     timeline.to(element.stageHint, { opacity: 0, y: 5, duration: duration(0.35), ease: 'sine.inOut' }, 0);
     timeline.to(element.waxSeal, { scale: 0.92, y: 2, duration: duration(0.18), ease: 'power2.in' }, 0);
     timeline.call(this.callbacks.onWaxSound, [], duration(0.13));
+    // 蜡封并非碎裂：中心齿轮先咬合旋转，三片木制机关叶片像小门一样向外翻开。
+    timeline.to(element.waxSeal, { scale: 1.04, y: 0, duration: duration(0.22), ease: 'power2.out' }, duration(0.18));
+    timeline.to(mechanismGear, { rotate: 180, duration: duration(0.86), ease: 'power3.inOut' }, duration(0.2));
     timeline.to(
-      crackPaths,
-      { opacity: 0.9, strokeDashoffset: 0, duration: duration(0.38), stagger: duration(0.035), ease: 'power2.out' },
-      duration(0.2),
-    );
-    timeline.to(element.waxSeal, { scale: 1, y: 0, duration: duration(0.24), ease: 'power2.out' }, duration(0.38));
-    timeline.to([waxBase, waxMonogram], { opacity: 0.18, duration: duration(0.3) }, duration(0.5));
-    timeline.to(
-      fragments,
+      mechanismLeaves,
       {
-        x: (index) => [-12, 13, 4][index] ?? 0,
-        y: (index) => [9, 7, 17][index] ?? 10,
-        rotate: (index) => [-7, 8, 3][index] ?? 0,
-        opacity: 0,
-        duration: duration(0.52),
-        stagger: duration(0.035),
-        ease: 'power2.inOut',
+        x: (index) => [-17, 17, 0][index] ?? 0,
+        y: (index) => [-8, -8, 16][index] ?? 0,
+        rotate: (index) => [-66, 66, 78][index] ?? 0,
+        scale: 0.9,
+        opacity: 0.06,
+        duration: duration(0.78),
+        stagger: duration(0.11),
+        ease: 'power3.inOut',
       },
-      duration(0.52),
+      duration(0.34),
     );
-    timeline.to(element.waxSeal, { autoAlpha: 0, duration: duration(0.28), pointerEvents: 'none' }, duration(0.84));
+    timeline.to([waxBase, waxMonogram], { scale: 0.72, opacity: 0, duration: duration(0.42), ease: 'power2.in' }, duration(0.72));
+    timeline.to(element.waxSeal, { autoAlpha: 0, scale: 0.86, rotate: 24, duration: duration(0.34), pointerEvents: 'none' }, duration(0.98));
 
-    timeline.call(this.callbacks.onPaperSound, [], duration(0.66));
-    timeline.to(
-      element.pageLeft,
-      {
-        rotateY: -148,
-        boxShadow: '3px 18px 35px rgba(48, 31, 36, .12)',
-        duration: duration(1.8),
-        ease: 'power2.inOut',
-      },
-      duration(0.72),
-    );
-    timeline.to(
-      element.pageRight,
-      {
-        rotateY: 148,
-        boxShadow: '-3px 18px 35px rgba(48, 31, 36, .12)',
-        duration: duration(1.8),
-        ease: 'power2.inOut',
-      },
-      duration(0.79),
-    );
-    timeline.to(
-      element.letterSheet,
-      { autoAlpha: 1, y: 34, scale: 0.87, rotateZ: -0.8, duration: duration(0.82), ease: 'power3.out' },
-      duration(1.02),
-    );
+    // 第一幕：薄雾散开；第二幕：盒盖左右打开；最后才让信件从盒中升起。
+    timeline.call(this.callbacks.onPaperSound, [], duration(0.78));
+    timeline.to(cloudCurtains.filter((_, index) => index === 0), {
+      xPercent: -132, autoAlpha: 0.08, duration: duration(1.7), ease: 'power2.inOut',
+    }, duration(0.58));
+    timeline.to(cloudCurtains.filter((_, index) => index === 1), {
+      xPercent: 132, autoAlpha: 0.08, duration: duration(1.7), ease: 'power2.inOut',
+    }, duration(0.58));
+
+    // 盒子先完整打开，给观众一个能看清木盒内部的停顿。
+    timeline.to(element.pageLeft, {
+      rotateY: -158,
+      boxShadow: '3px 18px 35px rgba(48, 31, 36, .12)',
+      duration: duration(1.12),
+      ease: 'power3.inOut',
+    }, duration(1.72));
+    timeline.to(element.pageRight, {
+      rotateY: 158,
+      boxShadow: '-3px 18px 35px rgba(48, 31, 36, .12)',
+      duration: duration(1.12),
+      ease: 'power3.inOut',
+    }, duration(1.8));
+
+    // 盒盖打开后，信纸再从盒内升起，不再与翻盖动作重叠。
+    timeline.to(element.letterSheet, {
+      autoAlpha: 1, y: 38, scale: 0.82, rotateZ: -1.1,
+      duration: duration(0.78), ease: 'power3.out',
+    }, duration(3.02));
 
     if (!reducedMotion) this.addDecorationMotion(timeline, decorations, duration);
 
-    timeline.to(
-      element.letterSheet,
-      { y: 0, scale: 1, rotateZ: 0, duration: duration(1.2), ease: 'power3.out' },
-      duration(2.22),
-    );
-    timeline.to(
-      shellParts,
-      { opacity: 0.08, y: 22, duration: duration(0.9), ease: 'sine.inOut' },
-      duration(2.65),
-    );
-    timeline.call(this.callbacks.onRevealReady, [], duration(3.35));
-    timeline.to(element.stageHint, { opacity: 1, y: 0, duration: duration(0.45), ease: 'sine.inOut' }, duration(3.38));
-    timeline.addPause('revealHold');
-    timeline.addLabel('completion', 'revealHold+=0.02');
+    timeline.to(element.letterSheet, {
+      y: 0, scale: 1, rotateZ: 0, duration: duration(0.9), ease: 'power3.out',
+    }, duration(3.82));
+    timeline.to(shellParts, {
+      opacity: 0.08, y: 22, duration: duration(0.72), ease: 'sine.inOut',
+    }, duration(4.02));
+    timeline.call(this.callbacks.onRevealReady, [], duration(4.65));
+    timeline.to(element.stageHint, { opacity: 1, y: 0, duration: duration(0.45), ease: 'sine.inOut' }, duration(4.68));
+    timeline.addLabel('completion', duration(5.15));
 
-    timeline.to(
-      element.revealCanvas,
-      { opacity: 0, duration: duration(1.5), ease: 'sine.inOut' },
-      'completion',
-    );
     timeline.to(
       element.letterCopy,
       { y: -10, duration: duration(1.2), ease: 'sine.inOut' },
@@ -175,8 +167,8 @@ export class CeremonyTimeline {
       'finale',
     );
     timeline.to(
-      fadeTargets,
-      { opacity: 0.025, y: -8, duration: duration(0.78), stagger: duration(0.025), ease: 'sine.inOut' },
+      [...fadeTargets, ...letterStickers],
+      { opacity: 0, y: -8, duration: duration(0.62), stagger: duration(0.02), ease: 'sine.inOut' },
       'finale',
     );
     timeline.to(
@@ -223,6 +215,13 @@ export class CeremonyTimeline {
         finaleFooter,
         { opacity: 1, y: 0, duration: duration(0.48), ease: 'sine.inOut' },
         `finale+=${duration(4.18)}`,
+      );
+    }
+    if (finaleImage) {
+      timeline.to(
+        finaleImage,
+        { opacity: 1, y: 0, duration: duration(0.62), ease: 'sine.inOut' },
+        `finale+=${duration(4.05)}`,
       );
     }
     timeline.to(

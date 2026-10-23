@@ -1,6 +1,6 @@
 type SoundName = 'wax';
 
-const backgroundMusicUrl = new URL('../assets/audio/happybirthday.mp3', import.meta.url).href;
+const backgroundMusicUrl = new URL('../assets/audio/qasi9-h2ilm.mp3', import.meta.url).href;
 const backgroundMusicVolume = 0.42;
 
 /**

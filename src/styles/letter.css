@@ -99,13 +99,12 @@
   position: absolute;
   inset: 13.5% 12.5% 11.5%;
   z-index: 3;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(114, 158, 178, .42) transparent;
   color: var(--color-ink);
-}
-
-.reveal-canvas:focus-visible {
-  outline: 2px solid rgba(52, 61, 56, 0.82);
-  outline-offset: -3px;
 }
 
 .letter-copy {
@@ -166,51 +165,7 @@
   margin-left: auto;
 }
 
-.reveal-canvas {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  cursor: none;
-  touch-action: none;
-  user-select: none;
-}
-
-.reveal-glow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 5;
-  width: clamp(92px, 18vw, 138px);
-  aspect-ratio: 1;
-  margin: calc(clamp(92px, 18vw, 138px) / -2) 0 0 calc(clamp(92px, 18vw, 138px) / -2);
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(225, 194, 127, 0.27), rgba(195, 161, 93, 0.1) 38%, transparent 70%);
-  opacity: 0;
-  mix-blend-mode: multiply;
-  pointer-events: none;
-  transition: opacity 0.32s ease;
-  will-change: transform, opacity;
-}
-
-.reveal-glow.is-visible {
-  opacity: 0.7;
-}
-
-.reveal-glow.is-hinting {
-  animation: glow-hint 1.8s ease-in-out 1;
-}
-
-@keyframes glow-hint {
-  0%,
-  100% {
-    opacity: 0.18;
-    filter: blur(1px);
-  }
-  50% {
+50% {
     opacity: 0.58;
     filter: blur(3px);
   }
@@ -262,13 +217,195 @@
   letter-spacing: 0.16em;
 }
 
-.phase-revealing .letter-copy-wrap {
-  cursor: none;
-}
-
 .phase-finale .letter-sheet {
   box-shadow:
     0 34px 76px rgba(69, 50, 46, 0.13),
     0 9px 22px rgba(69, 50, 46, 0.08),
     0 0 42px rgba(195, 161, 93, 0.08);
+}
+
+/* The letter itself is a scrollable long-form reading surface. */
+.letter-copy-wrap::-webkit-scrollbar { width: 5px; }
+.letter-copy-wrap::-webkit-scrollbar-thumb { border-radius: 9px; background: rgba(114,158,178,.42); }
+.letter-copy-wrap::-webkit-scrollbar-track { background: transparent; }
+.letter-copy { justify-content: flex-start; padding-block: 4%; }
+.reveal-line { white-space: normal; }
+.letter-sticker { flex: 0 0 auto; }
+@media (max-width: 370px) {
+  .letter-copy { padding-block: 2%; }
+  .letter-sticker--postcard { gap: 5px; padding: 5px; }
+}
+
+
+.letter-copy {
+  position: relative;
+  inset: auto;
+  min-height: 100%;
+}
+
+/* The letter is immediately readable once the theatre doors open. */
+.letter-copy-wrap { pointer-events: auto; }
+.letter-copy { opacity: 1; }
+
+/* The letter should be the focus: reduce the side mechanism rails to subtle structural trim. */
+.puppet-hardware {
+  width: 5px;
+  top: 15%;
+  bottom: 15%;
+  border: 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(76,104,116,.22), rgba(188,204,201,.42), rgba(76,104,116,.2));
+  box-shadow: none;
+  opacity: .38;
+}
+.puppet-hardware--left { left: 4px; }
+.puppet-hardware--right { right: 4px; }
+.puppet-hardware i,
+.puppet-hardware::before,
+.puppet-hardware::after { display: none !important; }
+
+/* Keep long-form letter content in normal flow so mouse wheel/trackpad can scroll it. */
+.letter-copy-wrap {
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+.letter-copy {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  padding-block: 4%;
+}
+.letter-wishes {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: .42em;
+}
+.letter-sticker {
+  position: relative;
+  display: block;
+  width: min(100%, 210px);
+  margin: .45em auto .65em;
+  padding: 0;
+  text-align: center;
+}
+.letter-sticker img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 190px;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto;
+}
+.letter-sticker figcaption {
+  margin-top: .35em;
+  font-size: .78em;
+  line-height: 1.5;
+  letter-spacing: .04em;
+  opacity: .82;
+}
+.letter-sticker--snow {
+  width: min(100%, 112px);
+}
+.letter-sticker--snow img {
+  max-height: 100px;
+}
+/* The finale keeps its original centered typography; only the letter layer is removed. */
+.phase-finale .letter-copy-wrap {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+
+/* Restore the original centered finale composition, isolated from long-letter rules. */
+.phase-finale .finale-content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+.phase-finale .finale-content .finale-title,
+.phase-finale .finale-content .finale-wishes,
+.phase-finale .finale-content .finale-line,
+.phase-finale .finale-content .finale-footer {
+  width: 100%;
+  align-self: center;
+  text-align: center !important;
+  box-sizing: border-box;
+}
+.phase-finale .finale-content .finale-wishes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.phase-finale .finale-content .finale-line {
+  margin-inline: auto;
+}
+.phase-finale .finale-content .finale-footer {
+  right: 0;
+  left: 0;
+  margin-inline: auto;
+}
+
+
+/* Image placed below the finale wishes, above the fixed footer. */
+.phase-finale .finale-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: clamp(0.8rem, 2.2vh, 1.4rem) auto 0;
+  flex: 0 1 auto;
+  min-height: 0;
+}
+.phase-finale .finale-image img {
+  display: block;
+  width: auto;
+  max-width: min(100%, 300px);
+  max-height: min(24dvh, 170px);
+  height: auto;
+  object-fit: contain;
+  border-radius: 3px;
+  box-shadow: 0 5px 18px rgba(69, 50, 46, 0.14);
+}
+@media (max-width: 680px) {
+  .phase-finale .finale-content { padding: 13% 8% 15%; }
+  .phase-finale .finale-image { margin-top: clamp(0.6rem, 1.5vh, 1rem); }
+  .phase-finale .finale-image img { max-width: min(100%, 240px); max-height: min(20dvh, 135px); }
+}
+
+
+/* The finale artwork must not appear on the normal letter-reading page. */
+.finale-image {
+  display: none !important;
+}
+.phase-finale .finale-image {
+  display: flex !important;
+  margin-top: clamp(1rem, 2.8vh, 1.6rem);
+  transform: translateY(12px);
+}
+.phase-finale .finale-image img {
+  width: auto;
+  height: auto;
+  max-width: min(76%, 230px);
+  max-height: min(18dvh, 125px);
+  object-fit: contain;
+}
+@media (max-width: 680px) {
+  .phase-finale .finale-image {
+    margin-top: clamp(0.8rem, 2.2vh, 1.2rem);
+    transform: translateY(10px);
+  }
+  .phase-finale .finale-image img {
+    max-width: min(72%, 190px);
+    max-height: min(16dvh, 105px);
+  }
 }

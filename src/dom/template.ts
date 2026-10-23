@@ -13,23 +13,35 @@ const escapeHtml = (value: string): string =>
   });
 
 const coverBotanical = `
-  <svg class="cover-botanical" viewBox="0 0 320 220" aria-hidden="true" focusable="false">
-    <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M34 186C55 169 67 146 69 115C71 84 83 59 108 42" />
-      <path d="M69 120C52 113 43 101 41 85C57 87 69 98 72 113" />
-      <path d="M72 101C87 95 98 83 102 66C87 69 75 79 70 93" />
-      <path d="M58 151C43 148 33 140 27 126C43 125 56 134 63 145" />
-      <path d="M286 34C266 50 253 73 249 103C246 134 232 158 207 175" />
-      <path d="M249 99C266 106 276 117 279 133C263 132 251 122 247 107" />
-      <path d="M246 118C231 123 219 135 215 152C231 149 243 139 248 126" />
-      <path d="M260 68C276 71 287 79 293 93C276 94 264 85 257 74" />
-      <path d="M108 42c8-8 17-10 26-6c-3 11-12 17-26 18c-6-4-6-8 0-12Z" />
-      <path d="M207 175c-8 8-17 10-26 6c3-11 12-17 26-18c6 4 6 8 0 12Z" />
-      <circle cx="118" cy="37" r="2.3" />
-      <circle cx="198" cy="181" r="2.3" />
+  <svg class="cover-botanical cover-mechanics" viewBox="0 0 320 220" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f0e5bd"/><stop offset=".5" stop-color="#b9c8bf"/><stop offset="1" stop-color="#d0b77a"/></linearGradient>
+      <linearGradient id="wood" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1f4054"/><stop offset=".45" stop-color="#52798b"/><stop offset="1" stop-color="#243f51"/></linearGradient>
+      <linearGradient id="inlay" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e5d7a6"/><stop offset="1" stop-color="#9aaea9"/></linearGradient>
+    </defs>
+    <!-- A carved cabinet plaque with restrained nautical filigree, not a pile of gears. -->
+    <path d="M160 18C147 33 130 35 111 36C119 49 115 61 101 71C116 78 123 91 119 110C123 129 116 142 101 149C115 160 119 172 111 184C132 185 148 191 160 204C172 191 188 185 209 184C201 172 205 160 219 149C204 142 197 129 201 110C197 91 204 78 219 71C205 61 201 49 209 36C190 35 173 33 160 18Z" fill="url(#wood)" stroke="url(#brass)" stroke-width="2.5"/>
+    <path d="M160 29C148 42 136 45 122 46C130 58 125 68 114 75C129 84 134 95 131 110C134 125 129 137 114 145C125 153 130 165 122 174C139 176 151 184 160 194C169 184 181 176 198 174C190 165 195 153 206 145C191 137 186 125 189 110C186 95 191 84 206 75C195 68 190 58 198 46C184 45 172 42 160 29Z" fill="none" stroke="url(#inlay)" stroke-width="1.5" opacity=".9"/>
+    <g fill="none" stroke="url(#brass)" stroke-width="1.7" stroke-linecap="round">
+      <path d="M160 39V67M160 153V181"/>
+      <path d="M150 50C136 53 135 65 145 72C151 76 156 72 160 67C164 72 169 76 175 72C185 65 184 53 170 50"/>
+      <path d="M150 170C136 167 135 155 145 148C151 144 156 148 160 153C164 148 169 144 175 148C185 155 184 167 170 170"/>
+      <path d="M126 92C137 87 145 93 145 102C145 108 139 110 132 110C139 110 145 112 145 118C145 127 137 133 126 128"/>
+      <path d="M194 92C183 87 175 93 175 102C175 108 181 110 188 110C181 110 175 112 175 118C175 127 183 133 194 128"/>
+      <path d="M141 110H179"/>
     </g>
+    <path d="M160 77L178 91V129L160 143L142 129V91Z" fill="#213f51" stroke="url(#brass)" stroke-width="2"/>
+    <path d="M160 84L171 94V126L160 136L149 126V94Z" fill="url(#wood)" stroke="#d9c68d" stroke-width="1.2"/>
+    <path d="M160 91L165 105L160 118L155 105Z" fill="url(#brass)"/>
+    <circle cx="160" cy="110" r="4" fill="#f0e5bd" stroke="#25475a" stroke-width="1.5"/>
+    <g fill="url(#brass)" stroke="#29495b" stroke-width="1">
+      <circle cx="160" cy="24" r="3"/><circle cx="160" cy="198" r="3"/>
+      <circle cx="108" cy="72" r="2.5"/><circle cx="212" cy="72" r="2.5"/>
+      <circle cx="108" cy="148" r="2.5"/><circle cx="212" cy="148" r="2.5"/>
+    </g>
+    <path d="M40 110H96M224 110H280" stroke="url(#brass)" stroke-width="1.3" opacity=".5"/>
+    <path d="M47 104L40 110L47 116M273 104L280 110L273 116" fill="none" stroke="url(#brass)" stroke-width="1.3" opacity=".5"/>
   </svg>`;
-
 const paperBotanical = `
   <svg class="paper-botanical paper-botanical--top" viewBox="0 0 150 120" aria-hidden="true" focusable="false">
     <g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
@@ -51,7 +63,14 @@ const paperBotanical = `
 export const createTemplate = (): string => {
   const copy = cardContent;
   const wishLines = copy.letter.wishes
-    .map((line) => `<span class="reveal-line reveal-target">${escapeHtml(line)}</span>`)
+    .map((line, index) => {
+      const sticker = index === 1
+        ? '<figure class="letter-sticker letter-sticker--postcard"><img src="./images/winter-postcard.svg" alt="雪夜小屋插画" loading="lazy"><figcaption>把一盏灯，留给冬夜。</figcaption></figure>'
+        : index === 3
+          ? '<figure class="letter-sticker letter-sticker--snow"><img src="./images/snowflake-sticker.svg" alt="雪花装饰" loading="lazy"></figure>'
+          : '';
+      return `<span class="reveal-line reveal-target">${escapeHtml(line)}</span>${sticker}`;
+    })
     .join('');
   const finaleLines = copy.finale.wishes
     .map((line) => `<p class="finale-line">${escapeHtml(line)}</p>`)
@@ -64,12 +83,18 @@ export const createTemplate = (): string => {
       <div class="botanical-shadow botanical-shadow--left" aria-hidden="true"></div>
       <div class="botanical-shadow botanical-shadow--right" aria-hidden="true"></div>
 
-      <section class="scene" aria-label="${escapeHtml(copy.accessibility.sceneLabel)}">
+      <section class="scene" data-scene aria-label="${escapeHtml(copy.accessibility.sceneLabel)}">
+        <div class="cloud-curtain mist-curtain mist-curtain--left" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="cloud-curtain mist-curtain mist-curtain--right" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="snow-specks" aria-hidden="true"></div>
         <div class="card-stage" data-card-stage>
           <div class="card-float" data-card-float>
             <div class="card-book" data-card-book>
               <div class="card-depth" aria-hidden="true"></div>
+              <div class="puppet-hardware puppet-hardware--left" aria-hidden="true"><i></i><i></i><i></i></div>
+              <div class="puppet-hardware puppet-hardware--right" aria-hidden="true"><i></i><i></i><i></i></div>
               <div class="card-inner" aria-hidden="true">
+                <span class="theatre-curtain theatre-curtain--left"></span><span class="theatre-curtain theatre-curtain--right"></span>
                 <span class="card-inner-mark">${escapeHtml(copy.decorative.innerMark)}</span>
               </div>
 
@@ -91,19 +116,13 @@ export const createTemplate = (): string => {
                       <p class="reveal-target">${escapeHtml(copy.letter.date)}</p>
                     </div>
                   </div>
-                  <canvas
-                    class="reveal-canvas"
-                    data-reveal-canvas
-                    tabindex="-1"
-                    role="application"
-                    aria-label="${escapeHtml(copy.controls.revealAria)}"
-                  ></canvas>
-                  <div class="reveal-glow" data-reveal-glow aria-hidden="true"></div>
+
                 </div>
 
                 <div class="finale-content" data-finale-content aria-live="polite" aria-hidden="true">
                   <h1 class="finale-title" data-finale-title>${escapeHtml(copy.finale.title)}</h1>
                   <div class="finale-wishes">${finaleLines}</div>
+                  <figure class="finale-image"><img src="./images/0A394902738AD3994F4ECBA595B99B09.jpg" alt="终章祝福插图" loading="lazy"></figure>
                   <p class="finale-footer">${escapeHtml(copy.finale.footer)}</p>
                 </div>
               </article>
@@ -126,15 +145,13 @@ export const createTemplate = (): string => {
 
               <button class="wax-seal" data-wax-seal type="button" aria-label="${escapeHtml(copy.controls.sealAria)}">
                 <span class="wax-base" aria-hidden="true"></span>
-                <span class="wax-fragment wax-fragment--one" aria-hidden="true"></span>
-                <span class="wax-fragment wax-fragment--two" aria-hidden="true"></span>
-                <span class="wax-fragment wax-fragment--three" aria-hidden="true"></span>
-                <svg class="wax-cracks" viewBox="0 0 84 84" aria-hidden="true" focusable="false">
-                  <path pathLength="1" d="M42 18 38 34 45 43 37 52 40 68" />
-                  <path pathLength="1" d="M44 42 58 35 66 39" />
-                  <path pathLength="1" d="M38 34 25 29 18 34" />
-                  <path pathLength="1" d="M37 52 26 58 22 66" />
-                </svg>
+                <span class="mechanism-leaf mechanism-leaf--one" aria-hidden="true"></span>
+                <span class="mechanism-leaf mechanism-leaf--two" aria-hidden="true"></span>
+                <span class="mechanism-leaf mechanism-leaf--three" aria-hidden="true"></span>
+                <span class="mechanism-gear" aria-hidden="true"></span>
+                <span class="mechanism-bolt mechanism-bolt--one" aria-hidden="true"></span>
+                <span class="mechanism-bolt mechanism-bolt--two" aria-hidden="true"></span>
+                <span class="mechanism-bolt mechanism-bolt--three" aria-hidden="true"></span>
                 <span class="wax-monogram" aria-hidden="true">${escapeHtml(copy.decorative.waxMonogram)}</span>
               </button>
             </div>
